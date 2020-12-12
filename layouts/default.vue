@@ -1,8 +1,21 @@
 <template>
   <div>
-    <Nuxt />
+    <Header />
+    <b-container fluid>
+      <Nuxt />
+    </b-container>
   </div>
 </template>
+
+<script>
+import Header from '~/components/Header.vue'
+
+export default {
+  components: {
+    Header
+  }
+}
+</script>
 
 <style>
 html {
