@@ -1,10 +1,6 @@
 <template>
   <div>
-    <Header />
-    <b-container>
-      <Nuxt />
-      <Footer />
-    </b-container>
+    <Nuxt />
   </div>
 </template>
 
@@ -21,6 +17,14 @@ export default {
 </script>
 
 <style lang='scss'>
+
+// h1 {
+//     font-size: 1.4em;
+//     text-align: left;
+//     letter-spacing: -1px;
+//     margin-bottom: 0px;
+//   }
+
 .icon{
   position: absolute;
 }
@@ -33,14 +37,7 @@ export default {
     border-radius: 3px;
     font-weight: 500;
     width: 35px;
-}
-
-// btn-warning
-.btn-warning {
-  color: white;
-}
-.btn-warning:hover {
-  color: white;
+    color: white;
 }
 
 // rate_color
