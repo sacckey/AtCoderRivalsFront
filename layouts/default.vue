@@ -11,12 +11,54 @@
 <script>
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
+// import { mapActions } from "vuex";
+import { firebase,getCurrentUser } from '~/plugins/firebase'
 
 export default {
   components: {
     Header,
     Footer
-  }
+  },
+  // mounted () {
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   // this.isWaiting = false
+    //   if(user){
+    //     this.setUser(user)
+    //   }
+    // })
+    // this.getCurrentUser()
+  // },
+  methods: {
+    // ...mapActions(['gotUser']),
+    // getCurrentUser() {
+    //   return new Promise((resolve) => {
+    //     firebase.auth().onAuthStateChanged((user) => {
+    //       if(user){
+    //         this.isWaiting = false
+    //         this.setUser(user)
+    //       }
+    //       resolve()
+    //     })
+    //   })
+    // },
+    // async abcd() {
+    //   await this.getCurrentUser()
+    // }
+  },
+  computed: {
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated
+    }
+  },
+  // async middleware({ redirect }) {
+  //   console.log('=== middleware');
+  //   const currentUser = await getCurrentUser();
+
+  //   if (!currentUser) {
+  //     redirect('/top');
+  //   }
+  // }
+  // middleware: 'authenticated',
 }
 </script>
 

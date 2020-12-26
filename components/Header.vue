@@ -22,7 +22,7 @@
             <b-nav-item-dropdown text='Account' right>
               <b-dropdown-item href="#">Profile</b-dropdown-item>
               <b-dropdown-item href="/users/1/edit">Settings</b-dropdown-item>
-              <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+              <b-dropdown-item href="/" v-on:click="logout">Sign Out</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -30,6 +30,29 @@
     </b-navbar>
   </header>
 </template>
+
+<script>
+import { firebase } from '~/plugins/firebase'
+import { mapActions } from 'vuex'
+
+export default {
+  methods: {
+    ...mapActions(['setUser']),
+    // signout() {
+    //   firebase.auth().signOut()
+    //     .then(() => {
+    //       this.setUser(null)
+    //       // window.alert('Logged out')
+    //     })
+    //     .catch((e) => {
+    //       // window.alert('ログアウトに失敗しました')
+    //       console.log(e)
+    //     })
+    // },
+    ...mapActions("auth", ["logout"])
+  }
+}
+</script>
 
 <style lang='scss'>
 .navbar{

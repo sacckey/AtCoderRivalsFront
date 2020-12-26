@@ -1,10 +1,12 @@
 <template>
-  <b-row>
-    <Sidebar />
-    <div class="col-lg-8">
-      <Feeds />
-    </div>
-  </b-row>
+  <div>
+    <b-row>
+      <Sidebar />
+      <div class="col-lg-8">
+        <Feeds />
+      </div>
+    </b-row>
+  </div>
 </template>
 
 <script lang="ts">
@@ -16,6 +18,11 @@ export default Vue.extend({
   components: {
     Sidebar,
     Feeds
+  },
+  computed: {
+    // isAuthenticated() {
+    //   return this.$store.getters.isAuthenticated
+    // }
   }
 })
 </script>

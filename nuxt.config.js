@@ -46,5 +46,11 @@ export default {
 
   server: {
 　　port: 3001
-  }
+  },
+
+  ssr: false,
+
+  router: {
+    middleware: ['authenticated']
+  },
 }

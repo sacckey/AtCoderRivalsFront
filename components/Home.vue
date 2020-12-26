@@ -16,19 +16,19 @@
 </template>
 
 <script>
-import { firebase,auth } from '~/plugins/firebase'
 import { mapActions } from 'vuex'
+import { firebase } from '~/plugins/firebase'
 
 export default {
-  layout: 'top',
   methods: {
-    ...mapActions('auth',['gotUser']),
+    ...mapActions(['setUser']),
     login() {
       const provider = new firebase.auth.TwitterAuthProvider()
-      auth.signInWithPopup(provider)
+      firebase.auth().signInWithPopup(provider)
       .then((result) => {
          const user = result.user
-         this.gotUser(user)
+         this.setUser(user)
+         console.log(this.$store.state.user)
        }).catch((error) => {
          window.alert(error)
        })
