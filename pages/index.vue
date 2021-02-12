@@ -13,6 +13,7 @@ import Sidebar from '~/components/Sidebar.vue'
 import Feeds from '~/components/Feeds.vue'
 
 export default Vue.extend({
+  middleware: 'auth',
   components: {
     Sidebar,
     Feeds
