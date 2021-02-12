@@ -1,7 +1,7 @@
 <template>
   <aside class="col-lg-4 sidebar">
     <div class='user_info'>
-      <a href="/users/1"><img alt="Example User" class="icon" src="https://img.atcoder.jp/icons/dad973aa2cb707d7b4720afda8b4f294.png" width="80" height="80"></a>
+      <a href="/users/1"><img alt="Example User" class="icon" :src="photoURL" width="80" height="80"></a>
       <div class='user_name'>
         <h1>Example User</h1>
         <span><a href="/users/1">view my profile</a></span>
@@ -15,6 +15,21 @@
     </div>
   </aside>
 </template>
+
+<script>
+import { mapState, mapGetters, mapActions } from "vuex";
+export default {
+  computed: {
+  // ...mapState(["authUser"]),
+    photoURL () {
+      return this.$store.state.authUser?.photoURL
+    },
+  // isAuthenticated() {
+  //   return this.$store.getters.isAuthenticated
+  // }
+  }
+}
+</script>
 
 <style lang='scss'>
 .user_name{

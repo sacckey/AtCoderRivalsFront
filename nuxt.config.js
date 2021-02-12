@@ -34,8 +34,47 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+
+    '@nuxtjs/pwa',
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: "AIzaSyDYzrKzNdQlPYQgg0ESdW-dmV94xiycndY",
+          authDomain: "atcoder-rivals.firebaseapp.com",
+          projectId: "atcoder-rivals",
+          storageBucket: "atcoder-rivals.appspot.com",
+          messagingSenderId: "385533054515",
+          appId: "1:385533054515:web:58443f89461172e55e9d46",
+          measurementId: "G-0R3T6EQTGR"
+        },
+        services: {
+          auth: {
+            persistence: 'local',
+            initialize: {
+              onAuthStateChangedAction: 'onAuthStateChangedAction',
+            },
+            ssr: true
+          }
+        }
+      }
+    ]
   ],
+
+pwa: {
+  meta: false,
+  icon: false,
+
+  workbox: {
+    importScripts: [
+      '/firebase-auth-sw.js'
+    ],
+    // by default the workbox module will not install the service worker in dev environment to avoid conflicts with HMR
+    // only set this true for testing and remember to always clear your browser cache in development
+    dev: true
+  }
+},
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {},

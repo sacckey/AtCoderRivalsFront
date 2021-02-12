@@ -6,9 +6,10 @@
       </div>
       <div class="btns">
         <a class="btn btn-danger btn-lg" href="/about">About</a>
-        <a class="btn btn-primary btn-lg" rel="nofollow" data-method="post" href="/auth/twitter">
-          <span class="fab fa-twitter"></span> Sign up with Twitter</a>
-          <a class="btn btn-warning btn-lg" href="/login_sample">Try without signing up</a>
+        <a class="btn btn-primary btn-lg" v-on:click="login">
+          <span class="fab fa-twitter"></span> Sign up with Twitter
+        </a>
+        <a class="btn btn-warning btn-lg" href="/login_sample">Try without signing up</a>
       </div>
     </div>
   </div>
@@ -16,7 +17,27 @@
 
 <script>
 export default {
-  layout: 'top'
+  layout: 'top',
+  middleware({ store, redirect }) {
+    if(store.getters['isLoggedIn']) {
+      redirect('/');
+    }
+  },
+  methods: {
+    login() {
+      const provider = new this.$fireModule.auth.TwitterAuthProvider()
+      this.$fire.auth.signInWithPopup(provider)
+      .then((result) => {
+        // ログイン成功時の処理
+        window.alert('ログインしました')
+        window.location.reload()
+       }).catch((error) => {
+         // ログイン失敗時の処理
+         window.alert('ログインに失敗しました')
+         console.log(error)
+       })
+    }
+  }
 }
 </script>
 

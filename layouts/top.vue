@@ -40,6 +40,14 @@ export default {
     color: white;
 }
 
+// btn-warning
+.btn-warning {
+  color: white;
+}
+.btn-warning:hover {
+  color: white;
+}
+
 // rate_color
 .rate_gray{
   color: gray;

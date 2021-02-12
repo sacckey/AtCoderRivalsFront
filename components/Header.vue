@@ -22,7 +22,7 @@
             <b-nav-item-dropdown text='Account' right>
               <b-dropdown-item href="#">Profile</b-dropdown-item>
               <b-dropdown-item href="/users/1/edit">Settings</b-dropdown-item>
-              <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+              <b-dropdown-item href="#" v-on:click="logout">Sign Out</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -30,6 +30,26 @@
     </b-navbar>
   </header>
 </template>
+
+<script>
+export default {
+  methods: {
+    logout() {
+      this.$fire.auth.signOut()
+        .then(() => {
+          // ログアウト成功時の処理
+          window.alert('ログアウトしました')
+          window.location.reload()
+        })
+        .catch((error) => {
+          // ログアウト失敗時の処理
+          window.alert('ログアウトに失敗しました')
+          console.log(error)
+        })
+    },
+  }
+}
+</script>
 
 <style lang='scss'>
 .navbar{
