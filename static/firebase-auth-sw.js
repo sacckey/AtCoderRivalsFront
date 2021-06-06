@@ -1,12 +1,12 @@
 const ignorePaths = ["\u002F__webpack_hmr","\u002F_loading","\u002F_nuxt\u002F"]
 
 importScripts(
-  'https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js'
+  'https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js'
 )
 importScripts(
-  'https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js'
+  'https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js'
 )
-firebase.initializeApp({"apiKey":"AIzaSyDYzrKzNdQlPYQgg0ESdW-dmV94xiycndY","authDomain":"atcoder-rivals.firebaseapp.com","projectId":"atcoder-rivals","storageBucket":"atcoder-rivals.appspot.com","messagingSenderId":"385533054515","appId":"1:385533054515:web:58443f89461172e55e9d46","measurementId":"G-0R3T6EQTGR"})
+firebase.initializeApp({"apiKey":"AIzaSyDYzrKzNdQlPYQgg0ESdW-dmV94xiycndY","authDomain":"atcoder-rivals.firebaseapp.com","projectId":"atcoder-rivals","storageBucket":"atcoder-rivals.appspot.com","messagingSenderId":"385533054515","appId":"1:385533054515:web:58443f89461172e55e9d46","measurementId":"G-0R3T6EQTGR","databaseURL":""})
 
 // Initialize authService
 const authService = firebase.auth()

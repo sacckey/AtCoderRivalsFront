@@ -1,24 +1,64 @@
 <template>
-  <b-tabs content-class="mt-3">
-    <Submissions />
-    <Contests />
-  </b-tabs>
+  <client-only>
+    <b-tabs content-class="mt-3" v-model="tabIndex">
+      <Submissions :submissions="feeds.submissions" />
+      <Contests :contests="feeds.contests" />
+      <infinite-loading :identifier="tabIndex" @infinite="infiniteHandler"></infinite-loading>
+    </b-tabs>
+  </client-only>
 </template>
 
 <script>
 import Submissions from '~/components/Submissions.vue'
 import Contests from '~/components/Contests.vue'
 
+const feedsTypes = ['submissions', 'contests']
+
 export default {
+  props: {
+    baseURL: String
+  },
+  data() {
+    return {
+      feeds: {
+        submissions: [],
+        contests: []
+      },
+      pages: {
+        submissions: 1,
+        contests: 1,
+      },
+      tabIndex: 0,
+    }
+  },
   components: {
     Submissions,
     Contests
-  }
+  },
+  computed: {
+    feedsType() {
+      return feedsTypes[this.tabIndex]
+    },
+  },
+  methods: {
+    async infiniteHandler($state) {
+      const feedsType = this.feedsType
+      const page = this.pages[feedsType]
+      const data = await this.$axios.$get(`${this.baseURL}/${feedsType}?page=${page}`).catch((err) => console.error(err))
+      if (data[feedsType].length) {
+        this.pages[feedsType] += 1
+        const self = this
+        this.feeds[feedsType].push(...data[feedsType])
+        $state.loaded()
+      } else {
+        $state.complete()
+      }
+    },
+  },
 }
 </script>
 
 <style lang='scss'>
-/* feeds */
 .feeds {
   list-style: none;
   padding: 0;
@@ -41,7 +81,6 @@ export default {
   }
 
   .feed_footer {
-    // $gray-light:   lighten(#000, 46.7%);
     color: gray;
     .timestamp {
       margin-left: 3px;

@@ -21,51 +21,57 @@ export default {
 </script>
 
 <style lang='scss'>
+@import '~bootstrap/scss/bootstrap';
+
 .icon{
   position: absolute;
 }
 
 // btn-xs
-.btn-xs, .btn-group-xs > .btn {
-    padding: 1px 5px;
-    font-size: 12px;
-    line-height: normal;
-    border-radius: 3px;
-    font-weight: 500;
-    width: 35px;
+.btn-xs {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: normal;
+  border-radius: 3px;
+  font-weight: 500;
+  width: 35px;
+  color: white;
+  &:hover {
+    color: white;
+  }
 }
 
-// btn-warning
-.btn-warning {
-  color: white;
-}
-.btn-warning:hover {
-  color: white;
+.btn-ac {
+  @extend .btn-success;
 }
 
-// rate_color
-.rate_gray{
+.btn-ce, .btn-mle, .btn-tle, .btn-re, .btn-ole, .btn-ie, .btn-wa, .btn-wj, .btn-wr {
+  @extend .btn-warning;
+}
+
+// rating_color
+.rating_gray{
   color: gray;
 }
-.rate_brown{
+.rating_brown{
   color: #804000;
 }
-.rate_green{
+.rating_green{
   color: green;
 }
-.rate_cyan{
+.rating_cyan{
   color: #00C0C0;
 }
-.rate_blue{
+.rating_blue{
   color: blue;
 }
-.rate_yellow{
+.rating_yellow{
   color: #C0C000;
 }
-.rate_orange{
+.rating_orange{
   color: #FF8000;
 }
-.rate_red{
+.rating_red{
   color: red;
 }
 </style>

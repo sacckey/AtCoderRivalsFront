@@ -2,8 +2,12 @@
     <b-tab title="Contests">
     <h3>Contests</h3>
     <ol class="feeds">
-      <li id="contest-177">
-        <a href="https://atcoder.jp/contests/abc173">AtCoder Beginner Contest 173</a>
+      <li
+          v-for="contest in contests"
+          :key="contest.contest_name"
+          :id="contest.contest_name"
+      >
+        <a :href="`https://atcoder.jp/contests/${contest.contest_name}`">{{ contest.title }}</a>
         <div class="content">
           <table class="table table-striped table-bordered contest-table">
             <thead>
@@ -12,25 +16,37 @@
                   <th>place</th>
                   <th>name</th>
                   <th>performance</th>
-                  <th>new rating</th>
+                  <th>rating change</th>
                 </tr>
             </thead>
             <tbody>
-              <tr id="history-198">
-              <td><a href="https://atcoder.jp/users/Yama24"><img alt="Yama24" src="https://img.atcoder.jp/icons/dad973aa2cb707d7b4720afda8b4f294.png" width="20" height="20"></a></td>
-              <td><a href="https://atcoder.jp/contests/abc173/standings?watching=Yama24">4761</a></td>
-              <td><a class="rate_green" href="https://atcoder.jp/users/Yama24">Yama24</a></td>
-                <td><span class="rate_brown">721</span></td>
-                <td><span class="rate_green">987</span> (-26)</td>
+              <tr
+                v-for="history in contest.histories"
+                :key="history.atcoder_id"
+                :id="history.atcoder_id"
+              >
+                <td><a :href="`https://atcoder.jp/users/${history.atcoder_id}`"><img :alt="history.atcoder_id" :src="history.image_url" width="20" height="20"></a></td>
+                <td><a :href="`https://atcoder.jp/contests/abc173/standings?watching=${history.atcoder_id}`">{{ history.place }}</a></td>
+                <td><a :class="ratingColor(history.old_rating)" :href="`https://atcoder.jp/users/${history.atcoder_id}`">{{ history.atcoder_id }}</a></td>
+                  <td><span :class="ratingColor(history.performance)">{{ history.performance }}</span></td>
+                  <td><span :class="ratingColor(history.old_rating)">{{ history.old_rating }}</span> → <span :class="ratingColor(history.new_rating)">{{ history.new_rating }}</span></td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="feed_footer">
-          rate change:  ~ 1999
-          <span class="timestamp">2020-07-05 12:00:00 +0000</span>
+          <span>Rated change:{{ contest.rate_change }}</span>
+          <span class="timestamp">{{ $dayjs(contest.start_epoch_second * 1000).format('YYYY-MM-DD HH:mm:ss') }}</span>
         </div>
       </li>
     </ol>
   </b-tab>
 </template>
+
+<script>
+export default {
+  props: {
+    contests: Array,
+  }
+}
+</script>
