@@ -2,27 +2,17 @@
   <header>
     <b-navbar toggleable="lg" type="dark" variant="info">
       <b-container>
-        <b-navbar-brand href='/'>AtCoder Rivals</b-navbar-brand>
-
+        <b-navbar-brand to='/'>AtCoder Rivals</b-navbar-brand>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
         <b-collapse id="nav-collapse" is-nav>
-          <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <b-navbar-nav>
-              <b-nav-item href='/'>Home</b-nav-item>
-            </b-navbar-nav>
-            <b-navbar-nav>
-              <b-nav-item href='/search'>Search</b-nav-item>
-            </b-navbar-nav>
-            <b-navbar-nav>
-              <b-nav-item href='/about'>About</b-nav-item>
-            </b-navbar-nav>
-
-            <b-nav-item-dropdown text='Account' right>
-              <b-dropdown-item href="#">Profile</b-dropdown-item>
-              <b-dropdown-item href="/users/1/edit">Settings</b-dropdown-item>
-              <b-dropdown-item href="#" v-on:click="logout">Sign Out</b-dropdown-item>
+            <b-nav-item to='/'>Home</b-nav-item>
+            <b-nav-item to='/about'>About</b-nav-item>
+            <b-nav-item to='/search' v-if="authUser">Search</b-nav-item>
+            <b-nav-item-dropdown text='Account' v-if="authUser" right>
+              <b-dropdown-item :to="`/users/${authUser.userId}`">Profile</b-dropdown-item>
+              <b-dropdown-item :to="`/users/${authUser.userId}/edit`">Settings</b-dropdown-item>
+              <b-dropdown-item @click.stop="logout">Sign Out</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -34,17 +24,17 @@
 <script>
 export default {
   methods: {
-    logout() {
+    logout({ redirect }) {
       this.$fire.auth.signOut()
         .then(() => {
-          // ログアウト成功時の処理
+          // ログアウト成功時
           window.alert('ログアウトしました')
-          window.location.reload()
+          this.$router.push('/top')
         })
         .catch((error) => {
-          // ログアウト失敗時の処理
+          // ログアウト失敗時
           window.alert('ログアウトに失敗しました')
-          console.log(error)
+          console.error(error)
         })
     },
   }

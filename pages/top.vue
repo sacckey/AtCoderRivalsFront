@@ -5,17 +5,18 @@
         <h1>AtCoder Rivals</h1>
       </div>
       <div class="btns">
-        <a class="btn btn-danger btn-lg" href="/about">About</a>
-        <a class="btn btn-primary btn-lg" v-on:click="login">
-          <span class="fab fa-twitter"></span> Sign up with Twitter
-        </a>
-        <a class="btn btn-warning btn-lg" href="/login_sample">Try without signing up</a>
+        <nuxt-link to="/about" class="btn btn-danger btn-lg">About</nuxt-link>
+        <div class="btn btn-primary btn-lg" @click="login">
+          <b-icon-twitter /> Sign up with Twitter
+        </div>
+        <nuxt-link to="/login_sample" class="btn btn-warning btn-lg">Try without signing up</nuxt-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { BIcon, BIconTwitter } from 'bootstrap-vue'
 export default {
   layout: 'top',
   middleware({ store, redirect }) {
@@ -23,18 +24,33 @@ export default {
       redirect('/');
     }
   },
+  components: {
+    BIcon,
+    BIconTwitter,
+  },
   methods: {
     login() {
       const provider = new this.$fireModule.auth.TwitterAuthProvider()
       this.$fire.auth.signInWithPopup(provider)
       .then((result) => {
+        return result.user.getIdToken()
+       })
+       .then((token) => {
+          this.$store.dispatch('setToken', token)
+          return this.$axios.$post(`v1/sessions`)
+       })
+       .then((authUser) => {
+        this.$store.dispatch('setUser', authUser)
+
         // ログイン成功時の処理
         window.alert('ログインしました')
-        window.location.reload()
-       }).catch((error) => {
+        this.$router.push('/')
+       })
+       .catch((error) => {
          // ログイン失敗時の処理
          window.alert('ログインに失敗しました')
-         console.log(error)
+         console.error(error)
+         this.$store.dispatch('resetState')
        })
     }
   }
@@ -42,13 +58,8 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-$brown: #5c4d42 !default;
-.top {
-  padding: 0;
-}
-.list {
-  font-size: 1.1em;
-  line-height: 1.7em;
+.bi-twitter  {
+  margin-right: 5px;
 }
 
 .jumbotron {
@@ -56,20 +67,10 @@ $brown: #5c4d42 !default;
 }
 
 .jumbotron-extend {
-  // padding-top: 0;
   position: relative;
   height: 100vh;
   min-height: 300px;
-  // background-size: auto 100vh;
-  // background-image: image-url('bg-masthead.jpg');
-
-  // background-color:rgba(92,77,66,0.5);
-  // background-blend-mode: darken;
-  // background-blend-mode: lighten;
-
-  // background: linear-gradient(to bottom, #{fade-out(#5c4d42, .2)} 0%,#{fade-out(#5c4d42, .2)} 100%), image-url('../assets/images/bg-masthead.jpg');
   background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url('../assets/images/bg-masthead.jpg');
-  // background: url("../assets/images/bg-masthead.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
@@ -90,6 +91,10 @@ $brown: #5c4d42 !default;
   }
   .btn {
     width: 250px;
+    color: white;
+    &:hover {
+      color: white;
+    }
   }
   .btn-danger {
     display: block;
@@ -101,9 +106,6 @@ $brown: #5c4d42 !default;
   .btn-primary, .btn-warning{
     margin: 0px 10px;
     margin-top: 20px;
-  }
-  .fab{
-    margin-right:5px;
   }
 }
 </style>

@@ -1,3 +1,5 @@
+const env = process.env.NODE_ENV
+
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -18,6 +20,10 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    '@/plugins/axios',
+    '@/plugins/dayjs',
+    { src: '~/plugins/infiniteloading', ssr: false },
+    '@/plugins/globalMixin'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -37,47 +43,49 @@ export default {
     '@nuxtjs/axios',
 
     '@nuxtjs/pwa',
-    [
-      '@nuxtjs/firebase',
-      {
-        config: {
-          apiKey: "AIzaSyDYzrKzNdQlPYQgg0ESdW-dmV94xiycndY",
-          authDomain: "atcoder-rivals.firebaseapp.com",
-          projectId: "atcoder-rivals",
-          storageBucket: "atcoder-rivals.appspot.com",
-          messagingSenderId: "385533054515",
-          appId: "1:385533054515:web:58443f89461172e55e9d46",
-          measurementId: "G-0R3T6EQTGR"
-        },
-        services: {
-          auth: {
-            persistence: 'local',
-            initialize: {
-              onAuthStateChangedAction: 'onAuthStateChangedAction',
-            },
-            ssr: true
-          }
-        }
-      }
-    ]
+    '@nuxtjs/firebase',
   ],
 
-pwa: {
-  meta: false,
-  icon: false,
+  firebase: {
+    config: {
+      apiKey: "AIzaSyDYzrKzNdQlPYQgg0ESdW-dmV94xiycndY",
+      authDomain: "atcoder-rivals.firebaseapp.com",
+      projectId: "atcoder-rivals",
+      storageBucket: "atcoder-rivals.appspot.com",
+      messagingSenderId: "385533054515",
+      appId: "1:385533054515:web:58443f89461172e55e9d46",
+      measurementId: "G-0R3T6EQTGR",
+      databaseURL: ''
+    },
+    services: {
+      auth: {
+        persistence: 'local',
+        initialize: {
+          onAuthStateChangedAction: 'onAuthStateChangedAction',
+        },
+        ssr: true
+      }
+    }
+  },
 
-  workbox: {
-    importScripts: [
-      '/firebase-auth-sw.js'
-    ],
-    // by default the workbox module will not install the service worker in dev environment to avoid conflicts with HMR
-    // only set this true for testing and remember to always clear your browser cache in development
-    dev: true
-  }
-},
+  pwa: {
+    meta: false,
+    icon: false,
+
+    workbox: {
+      importScripts: [
+        '/firebase-auth-sw.js'
+      ],
+      // by default the workbox module will not install the service worker in dev environment to avoid conflicts with HMR
+      // only set this true for testing and remember to always clear your browser cache in development
+      dev: env === 'development'
+    }
+  },
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    baseURL: env === 'production' ? 'https://atcoder-rivals.herokuapp.com/api' : 'http://localhost:3000/api'
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {

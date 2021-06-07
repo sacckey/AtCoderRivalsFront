@@ -1,40 +1,22 @@
 <template>
-  <aside class="col-lg-4 sidebar">
+  <aside class="col-lg-4 sidebar" v-if="authUser">
     <div class='user_info'>
-      <a href="/users/1"><img alt="Example User" class="icon" :src="photoURL" width="80" height="80"></a>
+      <nuxt-link :to="`/users/${authUser.userId}`"><img :alt="authUser.displayName" class="icon" :src="authUser.twitterPhotoURL" width="80" height="80"></nuxt-link>
       <div class='user_name'>
-        <h1>Example User</h1>
-        <span><a href="/users/1">view my profile</a></span>
-        <span class="atid"> AtCoder ID: <a class="rate_green" href="https://atcoder.jp/users/Yama24">Yama24</a></span>
+        <h1>{{ authUser.displayName }}</h1>
+        <span><nuxt-link :to="`/users/${authUser.userId}`">view my profile</nuxt-link></span>
+        <span class="atid"> AtCoder ID: <a :class="ratingColor(authUser.rating)" :href="`https://atcoder.jp/users/${authUser.atcoder_id}`">{{ authUser.atcoderId }}</a></span>
       </div>
     </div>
     <div class="stats">
-      <a href="/users/1/following">
-        <strong id="following">0</strong>following
-      </a>
+      <nuxt-link :to="`/users/${authUser.userId}/following`"><strong id="following">{{ authUser.followingCount }}</strong>following</nuxt-link>
     </div>
   </aside>
 </template>
 
-<script>
-import { mapState, mapGetters, mapActions } from "vuex";
-export default {
-  computed: {
-  // ...mapState(["authUser"]),
-    photoURL () {
-      return this.$store.state.authUser?.photoURL
-    },
-  // isAuthenticated() {
-  //   return this.$store.getters.isAuthenticated
-  // }
-  }
-}
-</script>
-
-<style lang='scss'>
+<style lang='scss' scoped>
 .user_name{
   height: 80px;
-  // position: relative;
   padding-left: 90px;
 }
 .user_info{
