@@ -1,6 +1,6 @@
 const env = process.env.NODE_ENV
 
-export default {
+module.exports = {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'atcoder-rivals-front',
@@ -89,6 +89,9 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+    babel: {
+      compact: true
+    }
   },
 
   server: {
