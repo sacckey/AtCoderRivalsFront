@@ -14,7 +14,7 @@
           </tbody></table>
         </div>
       </div>
-      <Feeds :baseURL="`v1/users/${authUser.userId}/`"/>
+      <Feeds :baseURL="`v1/users/${authUser.userId}`"/>
     </div>
   </b-row>
 </template>
