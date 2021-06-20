@@ -10,6 +10,9 @@
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint": "yarn lint:js"
   },
+  "engines": {
+    "node": "14"
+  },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/firebase": "^7.2.2",
