@@ -29,7 +29,7 @@ export default {
         .then(() => {
           // ログアウト成功時
           window.alert('ログアウトしました')
-          this.$router.push('/top')
+          this.$router.go()
         })
         .catch((error) => {
           // ログアウト失敗時
