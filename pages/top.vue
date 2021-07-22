@@ -54,7 +54,7 @@ export default {
        })
     },
     sampleLogin() {
-      return this.$axios.$post(`v1/sessions/sample_login`)
+      return this.$axios.$post('v1/sessions/sample_login')
       .then((authUser) => {
         this.$store.dispatch('setUser', authUser)
         this.$store.dispatch('setToken', authUser.auth_user.token)
