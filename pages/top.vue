@@ -9,7 +9,7 @@
         <div class="btn btn-primary btn-lg" @click="login">
           <b-icon-twitter /> Sign up with Twitter
         </div>
-        <nuxt-link to="/login_sample" class="btn btn-warning btn-lg">Try without signing up</nuxt-link>
+        <div class="btn btn-warning btn-lg" @click="sampleLogin">Try without signing up</div>
       </div>
     </div>
   </div>
@@ -52,6 +52,23 @@ export default {
          console.error(error)
          this.$store.dispatch('resetState')
        })
+    },
+    sampleLogin() {
+      return this.$axios.$post('v1/sessions/sample_login')
+      .then((authUser) => {
+        this.$store.dispatch('setUser', authUser)
+        this.$store.dispatch('setToken', authUser.auth_user.token)
+
+        // ログイン成功時の処理
+        window.alert('ログインしました')
+        this.$router.push('/')
+      })
+      .catch((error) => {
+        // ログイン失敗時の処理
+        window.alert('ログインに失敗しました')
+        console.error(error)
+        this.$store.dispatch('resetState')
+      })
     }
   }
 }
