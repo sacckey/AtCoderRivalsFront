@@ -41,7 +41,6 @@ export default {
         this.$router.push(`/users/${this.authUser.userId}`)
       } catch (err) {
         console.error('error!!!!!!!!!!!')
-        console.error(err.response.data.message)
         this.errorMessage = err.response.data.message
       }
     },
