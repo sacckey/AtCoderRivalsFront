@@ -5,7 +5,7 @@
       <div class='user_name'>
         <h1>{{ authUser.displayName }}</h1>
         <span><nuxt-link :to="`/users/${authUser.userId}`">view my profile</nuxt-link></span>
-        <span class="atid"> AtCoder ID: <a :class="ratingColor(authUser.rating)" :href="`https://atcoder.jp/users/${authUser.atcoder_id}`">{{ authUser.atcoderId }}</a></span>
+        <span class="atid"> AtCoder ID: <a :class="ratingColor(authUser.rating)" :href="`https://atcoder.jp/users/${authUser.atcoderId}`">{{ authUser.atcoderId }}</a></span>
       </div>
     </div>
     <div class="stats">

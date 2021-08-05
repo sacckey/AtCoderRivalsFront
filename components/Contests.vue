@@ -28,8 +28,11 @@
                 <td><a :href="`https://atcoder.jp/users/${history.atcoder_id}`"><img :alt="history.atcoder_id" :src="history.image_url" width="20" height="20"></a></td>
                 <td><a :href="`https://atcoder.jp/contests/abc173/standings?watching=${history.atcoder_id}`">{{ history.place }}</a></td>
                 <td><a :class="ratingColor(history.old_rating)" :href="`https://atcoder.jp/users/${history.atcoder_id}`">{{ history.atcoder_id }}</a></td>
-                  <td><span :class="ratingColor(history.performance)">{{ history.performance }}</span></td>
-                  <td><span :class="ratingColor(history.old_rating)">{{ history.old_rating }}</span> → <span :class="ratingColor(history.new_rating)">{{ history.new_rating }}</span></td>
+                <td>
+                  <span v-if="history.is_rated" :class="ratingColor(history.performance)">{{ history.performance }}</span>
+                  <span v-else> - </span>
+                </td>
+                <td><span :class="ratingColor(history.old_rating)">{{ history.old_rating }}</span> → <span :class="ratingColor(history.new_rating)">{{ history.new_rating }}</span></td>
               </tr>
             </tbody>
           </table>

@@ -41,6 +41,14 @@ export default {
   }
 }
 
+.btn-outline-primary {
+  &:hover {
+    color: var(--primary);
+    border-color: #0062cc;
+    background: white;
+  }
+}
+
 .btn-ac {
   @extend .btn-success;
 }
@@ -72,6 +80,10 @@ export default {
   color: #FF8000;
 }
 .rating_red{
+  color: red;
+}
+
+.validation_error_message {
   color: red;
 }
 </style>

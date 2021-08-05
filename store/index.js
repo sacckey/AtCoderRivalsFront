@@ -51,6 +51,36 @@ export const actions = {
       acceptedCount
     })
   },
+  incrementFollowingCount({ commit }, authUser){
+    let { displayName, userId, followingCount, atcoderId, rating, twitterPhotoURL, atcoderPhotoURL, acceptedCount } = authUser
+    followingCount += 1
+
+    commit('SET_USER', {
+      displayName,
+      userId,
+      followingCount,
+      atcoderId,
+      rating,
+      twitterPhotoURL,
+      atcoderPhotoURL,
+      acceptedCount
+    })
+  },
+  decrementFollowingCount({ commit }, authUser){
+    let { displayName, userId, followingCount, atcoderId, rating, twitterPhotoURL, atcoderPhotoURL, acceptedCount } = authUser
+    followingCount -= 1
+
+    commit('SET_USER', {
+      displayName,
+      userId,
+      followingCount,
+      atcoderId,
+      rating,
+      twitterPhotoURL,
+      atcoderPhotoURL,
+      acceptedCount
+    })
+  }
 }
 
 export const mutations = {

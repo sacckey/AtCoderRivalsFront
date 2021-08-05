@@ -31,6 +31,7 @@ export default {
   methods: {
     login() {
       const provider = new this.$fireModule.auth.TwitterAuthProvider()
+      // TODO: async/await, try/catchで書き直す
       this.$fire.auth.signInWithPopup(provider)
       .then((result) => {
         return result.user.getIdToken()
@@ -54,6 +55,7 @@ export default {
        })
     },
     sampleLogin() {
+      // TODO: async/await, try/catchで書き直す
       return this.$axios.$post('v1/sessions/sample_login')
       .then((authUser) => {
         this.$store.dispatch('setUser', authUser)
