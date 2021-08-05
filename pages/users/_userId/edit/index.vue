@@ -1,17 +1,52 @@
 <template>
   <div class="update-profile-container">
+    <b-alert :show="errorMessage.length > 0" variant="danger">{{ errorMessage }}</b-alert>
+
     <h1>Update your profile</h1>
     <div class="update-profile-form">
-      <form class="edit_atcoder_user" id="edit_atcoder_user_8" action="/users/1" accept-charset="UTF-8" method="post">
-        <input type="hidden" name="_method" value="patch">
-        <input type="hidden" name="authenticity_token" value="DM2Miw/YYuCrFCPMe+X7f6Nkkz3zksTAYEQNGYv4JUWzktTtrEAzH1JR/9Bn/Ib6z8+yQcnERTyRrhmU1OjBpg==">
-        <label for="atcoder_user_atcoder_id">AtCoder ID</label>
-        <input class="form-control" type="text" value="Yama24" name="atcoder_user[atcoder_id]" id="atcoder_user_atcoder_id">
-        <input type="submit" name="commit" value="Save changes" class="btn btn-primary" data-disable-with="Save changes">
-      </form>
+      <label for="atcoder_user_atcoder_id">AtCoder ID</label>
+      <input v-model="atcoderId" class="form-control" type="text" id="atcoder_user_atcoder_id">
+      <button @click="save" type="button" class="btn btn-primary" :disabled="validationErrorMessage.length > 0">Save changes</button>
+
+      <span class="validation_error_message">{{ validationErrorMessage }}</span>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  middleware: 'auth',
+  data() {
+    return {
+      atcoderId: this.$store.state.authUser.atcoderId,
+      errorMessage: ''
+    }
+  },
+  computed: {
+    validationErrorMessage() {
+      if (this.atcoderId.length < 3 || this.atcoderId.length > 16 || this.atcoderId.match(/[^A-Za-z0-9]+/)){
+        return 'フォーマットが正しくありません'
+      }
+      return ''
+    }
+  },
+  methods: {
+    async save() {
+      const body = { atcoder_id: this.atcoderId }
+      try {
+        const updatedAuthUser = await this.$axios.$patch(`v1/users/${this.authUser.userId}`, body)
+        this.$store.dispatch('setUser', updatedAuthUser)
+
+        window.alert('AtCoder IDを変更しました')
+        this.$router.push(`/users/${this.authUser.userId}`)
+      } catch (err) {
+        console.error('error!!!!!!!!!!!')
+        this.errorMessage = err.response.data.message
+      }
+    },
+  },
+}
+</script>
 
 <style lang='scss' scoped>
   h1{

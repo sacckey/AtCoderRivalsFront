@@ -5,20 +5,10 @@
       <h3>Following</h3>
       <ul class="followings">
         <li
-          v-for="user in following"
-          :key="user.atcoder_id"
+          v-for="atcoderUser in following"
+          :key="atcoderUser.atcoder_id"
         >
-          <div class='following'>
-            <a :href="`https://atcoder.jp/users/${user.atcoder_id}`"><img :alt="user.atcoder_id" class="icon" :src="user.image_url" width="50" height="50"></a>
-            <div class='follow-container'>
-              <a class="atcoder_id" :href="`https://atcoder.jp/users/${user.atcoder_id}`">{{ user.atcoder_id }}</a>
-              <div id="follow_form_2" class="follow_form">
-                <form class="edit_relationship" id="edit_relationship_4" action="/relationships/4" accept-charset="UTF-8" data-remote="true" method="post"><input type="hidden" name="_method" value="delete"><input type="hidden" name="authenticity_token" value="gWIsoImJYjqMXRM0/f/pqjbL3KNolzEB48cftbi8TAEwSuaf0SSPg71+iv6xXzJBZlkdwLCDPsCzzmI1RhR6+A==">
-                  <input type="submit" name="commit" value="Following" class="btn btn-primary" data-disable-with="Following">
-                </form>
-              </div>
-            </div>
-          </div>
+          <Following :atcoderUser="atcoderUser" :initialFollowingState=true />
         </li>
         <b-pagination
           v-model="currentPage"
@@ -34,12 +24,15 @@
 </template>
 
 <script>
+  import Following from '~/components/Following.vue'
+
   export default {
+    middleware: 'auth',
     data() {
       return {
         perPage: 30,
         currentPage: 1,
-        following: [],
+        following: []
       }
     },
     async fetch() {
@@ -58,23 +51,6 @@
 </script>
 
 <style lang='scss' scoped>
-.atcoder_id {
-  position: absolute;
-}
-
-.following {
-  height: 50px;
-}
-
-.follow_form {
-  padding-left: 150px;
-  padding-top: 7px;
-}
-
-.follow-container {
-  padding-left: 60px;
-}
-
 .followings {
   list-style: none;
   padding: 0;
