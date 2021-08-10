@@ -45,15 +45,6 @@ export default {
       const errorMessage = err.response.data.message
       this.callShowAlert(errorMessage)
     }
-  },
-  methods: {
-    handlePageChange(page) {
-      this.getFollowing(page)
-    },
-    async getFollowing(page) {
-      const data = await this.$axios.$get(`v1/users/${this.authUser.userId}/following?page=${page}`).catch((err) => console.error(err))
-      this.following = data.following
-    }
   }
 }
 </script>
