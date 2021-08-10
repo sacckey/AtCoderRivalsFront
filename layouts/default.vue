@@ -2,6 +2,16 @@
   <div>
     <Header />
     <b-container>
+      <b-alert
+      :show="dismissCountDown"
+      dismissible
+      fade
+      variant="danger"
+      @dismissed="dismissCountDown=0"
+      @dismiss-count-down="countDownChanged"
+      >
+      {{ message }}
+      </b-alert>
       <Nuxt />
       <Footer />
     </b-container>
@@ -16,6 +26,27 @@ export default {
   components: {
     Header,
     Footer
+  },
+  data() {
+    return {
+      message: '',
+      dismissSecs: 3,
+      dismissCountDown: 0
+    }
+  },
+  methods: {
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown
+    },
+    showAlert(message) {
+      this.message = message
+      this.dismissCountDown = this.dismissSecs
+    }
+  },
+  created() {
+    this.$nuxt.$on('show-alert', message => {
+      this.showAlert(message)
+    })
   }
 }
 </script>

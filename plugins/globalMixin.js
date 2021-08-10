@@ -11,6 +11,9 @@ Vue.mixin({
       else if (rating <= 2399) return "rating_yellow"
       else if (rating <= 2799) return "rating_orange"
       else                     return "rating_red"
+    },
+    callShowAlert(message) {
+      $nuxt.$emit('show-alert', message)
     }
   },
   computed: {

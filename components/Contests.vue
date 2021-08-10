@@ -25,9 +25,9 @@
                 :key="history.atcoder_id"
                 :id="history.atcoder_id"
               >
-                <td><a :href="`https://atcoder.jp/users/${history.atcoder_id}`"><img :alt="history.atcoder_id" :src="history.image_url" width="20" height="20"></a></td>
+                <td><nuxt-link :to="`/atcoder_users/${history.atcoder_id}`"><img :alt="history.atcoder_id" :src="history.image_url" width="20" height="20"></nuxt-link></td>
                 <td><a :href="`https://atcoder.jp/contests/abc173/standings?watching=${history.atcoder_id}`">{{ history.place }}</a></td>
-                <td><a :class="ratingColor(history.old_rating)" :href="`https://atcoder.jp/users/${history.atcoder_id}`">{{ history.atcoder_id }}</a></td>
+                <td><nuxt-link :class="ratingColor(history.old_rating)" :to="`/atcoder_users/${history.atcoder_id}`">{{ history.atcoder_id }}</nuxt-link></td>
                 <td>
                   <span v-if="history.is_rated" :class="ratingColor(history.performance)">{{ history.performance }}</span>
                   <span v-else> - </span>

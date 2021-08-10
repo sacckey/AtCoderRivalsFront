@@ -8,11 +8,11 @@
           :id="submission.number"
       >
         <div class="feed">
-          <a :href="`https://atcoder.jp/users/${submission.atcoder_id}`"><img :alt="submission.atcoder_id" class="icon" :src="submission.image_url" width="50" height="50"></a>
+          <nuxt-link :to="`/atcoder_users/${submission.atcoder_id}`"><img :alt="submission.atcoder_id" class="icon" :src="submission.image_url" width="50" height="50"></nuxt-link>
           <div class="submission">
             <div>
-              <a :class="`btn btn-xs btn-${submission.result.toLowerCase()}`" :href="`https://atcoder.jp/contests/${submission.contest_name}/submissions/${submission.number}`">{{ submission.result }}</a>
-              <a class="name" :href="`https://atcoder.jp/users/${submission.atcoder_id}`">{{ submission.atcoder_id }}</a>
+              <a :class="`btn btn-xs btn-${submission.result.toLowerCase()}`" :href="`https://atcoder.jp/contests/${submission.contest_name}//${submission.number}`">{{ submission.result }}</a>
+              <nuxt-link class="name" :to="`/atcoder_users/${submission.atcoder_id}`">{{ submission.atcoder_id }}</nuxt-link>
             </div>
             <div>
               <a :href="`https://atcoder.jp/contests/${submission.contest_name}`">{{ submission.contest_title }}</a>

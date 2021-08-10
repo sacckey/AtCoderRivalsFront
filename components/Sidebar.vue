@@ -1,11 +1,11 @@
 <template>
   <aside class="col-lg-4 sidebar" v-if="authUser">
     <div class='user_info'>
-      <nuxt-link :to="`/users/${authUser.userId}`"><img :alt="authUser.displayName" class="icon" :src="authUser.twitterPhotoURL" width="80" height="80"></nuxt-link>
+      <nuxt-link :to="`/atcoder_users/${authUser.atcoderId}`"><img :alt="authUser.displayName" class="icon" :src="authUser.twitterPhotoURL" width="80" height="80"></nuxt-link>
       <div class='user_name'>
         <h1>{{ authUser.displayName }}</h1>
-        <span><nuxt-link :to="`/users/${authUser.userId}`">view my profile</nuxt-link></span>
-        <span class="atid"> AtCoder ID: <a :class="ratingColor(authUser.rating)" :href="`https://atcoder.jp/users/${authUser.atcoderId}`">{{ authUser.atcoderId }}</a></span>
+        <span><nuxt-link :to="`/atcoder_users/${authUser.atcoderId}`">view my profile</nuxt-link></span>
+        <span class="atid"> AtCoder ID: <nuxt-link :class="ratingColor(authUser.rating)" :to="`/atcoder_users/${authUser.atcoderId}`">{{ authUser.atcoderId }}</nuxt-link></span>
       </div>
     </div>
     <div class="stats">
