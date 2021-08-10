@@ -1,7 +1,5 @@
 <template>
   <div class="update-profile-container">
-    <b-alert :show="errorMessage.length > 0" variant="danger">{{ errorMessage }}</b-alert>
-
     <h1>Update your profile</h1>
     <div class="update-profile-form">
       <label for="atcoder_user_atcoder_id">AtCoder ID</label>
@@ -18,8 +16,7 @@ export default {
   middleware: 'auth',
   data() {
     return {
-      atcoderId: this.$store.state.authUser.atcoderId,
-      errorMessage: ''
+      atcoderId: this.$store.state.authUser.atcoderId
     }
   },
   computed: {
@@ -38,10 +35,11 @@ export default {
         this.$store.dispatch('setUser', updatedAuthUser)
 
         window.alert('AtCoder IDを変更しました')
-        this.$router.push(`/users/${this.authUser.userId}`)
+        this.$router.push(`/atcoder_users/${this.authUser.atcoderId}`)
       } catch (err) {
         console.error('error!!!!!!!!!!!')
-        this.errorMessage = err.response.data.message
+        const errorMessage = err.response.data.message
+        this.callShowAlert(errorMessage)
       }
     },
   },

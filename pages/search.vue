@@ -2,8 +2,6 @@
   <b-row>
     <Sidebar />
     <div class="col-md-8">
-      <b-alert :show="errorMessage.length > 0" variant="danger">{{ errorMessage }}</b-alert>
-
       <h3>User Search</h3>
       <div class="user_search">
         <label for="atcoder_id">AtCoder ID</label>
@@ -13,7 +11,7 @@
         <span class="validation_error_message">{{ validationErrorMessage }}</span>
       </div>
 
-      <Following v-if="atcoderUser" :atcoderUser="atcoderUser" :initialFollowingState="atcoderUser.is_following" />
+      <Following v-if="atcoderUser" :atcoderUser="atcoderUser" />
     </div>
   </b-row>
 </template>
@@ -26,7 +24,6 @@ export default {
   data() {
     return {
       atcoderId: 'chokudai',
-      errorMessage: '',
       atcoderUser: null
     }
   },
@@ -40,17 +37,16 @@ export default {
   },
   methods: {
     async search() {
-      const body = { atcoder_id: this.atcoderId }
       try {
-        const atcoderUser = await this.$axios.$post(`v1/atcoder_users/search`, body)
+        const atcoderUser = await this.$axios.$get(`v1/atcoder_users/${this.atcoderId}`)
         this.atcoderUser = atcoderUser
-        this.errorMessage = ''
       } catch (err) {
         console.error('error!!!!!!!!!!!')
-        this.errorMessage = err.response.data.message
+        const errorMessage = err.response.data.message
+        this.callShowAlert(errorMessage)
       }
-    },
-  },
+    }
+  }
 }
 </script>
 

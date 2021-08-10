@@ -10,7 +10,7 @@
             <b-nav-item to='/about'>About</b-nav-item>
             <b-nav-item to='/search' v-if="authUser">Search</b-nav-item>
             <b-nav-item-dropdown text='Account' v-if="authUser" right>
-              <b-dropdown-item :to="`/users/${authUser.userId}`">Profile</b-dropdown-item>
+              <b-dropdown-item :to="`/atcoder_users/${authUser.atcoderId}`">Profile</b-dropdown-item>
               <b-dropdown-item :to="`/users/${authUser.userId}/edit`">Settings</b-dropdown-item>
               <b-dropdown-item @click.stop="logout">Sign Out</b-dropdown-item>
             </b-nav-item-dropdown>
