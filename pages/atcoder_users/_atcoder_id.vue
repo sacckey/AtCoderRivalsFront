@@ -3,10 +3,10 @@
     <Sidebar />
     <div class="col-lg-8" v-if="atcoderUser">
       <div class="profile">
-        <a :href="`https://atcoder.jp/users/${atcoderUser.atcoder_id}`"><img :alt="atcoderUser.atcoder_id" class="icon" :src="atcoderUser.image_url" width="100" height="100"></a>
+        <a :href="`https://atcoder.jp/users/${atcoderUser.atcoder_id}`" target="_blank"><img :alt="atcoderUser.atcoder_id" class="icon" :src="atcoderUser.image_url" width="100" height="100"></a>
         <div class="info">
           <h1>
-            <a :class="ratingColor(atcoderUser.rating)" :href="`https://atcoder.jp/users/${atcoderUser.atcoder_id}`">{{ atcoderUser.atcoder_id }}</a>
+            <a :class="ratingColor(atcoderUser.rating)" :href="`https://atcoder.jp/users/${atcoderUser.atcoder_id}`" target="_blank">{{ atcoderUser.atcoder_id }}</a>
           </h1>
           <table>
             <tbody><tr><th>Rating</th><td><span :class="ratingColor(atcoderUser.rating)">{{ atcoderUser.rating }}</span></td></tr>

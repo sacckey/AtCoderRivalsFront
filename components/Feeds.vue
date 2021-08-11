@@ -47,7 +47,6 @@ export default {
       const data = await this.$axios.$get(`${this.baseURL}/${feedsType}?page=${page}`).catch((err) => console.error(err))
       if (data[feedsType].length) {
         this.pages[feedsType] += 1
-        const self = this
         this.feeds[feedsType].push(...data[feedsType])
         $state.loaded()
       } else {

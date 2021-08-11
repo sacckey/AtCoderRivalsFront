@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="stats">
-      <nuxt-link :to="`/users/${authUser.userId}/following`"><strong id="following">{{ authUser.followingCount }}</strong>following</nuxt-link>
+      <nuxt-link to="/following"><strong id="following">{{ authUser.followingCount }}</strong>following</nuxt-link>
     </div>
   </aside>
 </template>
