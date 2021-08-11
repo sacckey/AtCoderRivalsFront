@@ -29,48 +29,36 @@ export default {
     BIconTwitter,
   },
   methods: {
-    login() {
-      const provider = new this.$fireModule.auth.TwitterAuthProvider()
-      // TODO: async/await, try/catchで書き直す
-      this.$fire.auth.signInWithPopup(provider)
-      .then((result) => {
-        return result.user.getIdToken()
-       })
-       .then((token) => {
-          this.$store.dispatch('setToken', token)
-          return this.$axios.$post(`v1/sessions`)
-       })
-       .then((authUser) => {
+    async login(){
+      try {
+        const provider = new this.$fireModule.auth.TwitterAuthProvider()
+        const result = await this.$fire.auth.signInWithPopup(provider)
+        const token = await result.user.getIdToken()
+        this.$store.dispatch('setToken', token)
+        const authUser = await this.$axios.$post(`v1/sessions`)
         this.$store.dispatch('setUser', authUser)
 
-        // ログイン成功時の処理
         window.alert('ログインしました')
         this.$router.push('/')
-       })
-       .catch((error) => {
-         // ログイン失敗時の処理
+      } catch (err) {
          window.alert('ログインに失敗しました')
-         console.error(error)
+         console.error(err)
          this.$store.dispatch('resetState')
-       })
+      }
     },
-    sampleLogin() {
-      // TODO: async/await, try/catchで書き直す
-      return this.$axios.$post('v1/sessions/sample_login')
-      .then((authUser) => {
+    async sampleLogin() {
+      try {
+        const authUser = await this.$axios.$post('v1/sessions/sample_login')
         this.$store.dispatch('setUser', authUser)
         this.$store.dispatch('setToken', authUser.auth_user.token)
 
-        // ログイン成功時の処理
         window.alert('ログインしました')
         this.$router.push('/')
-      })
-      .catch((error) => {
-        // ログイン失敗時の処理
+      } catch (err) {
         window.alert('ログインに失敗しました')
-        console.error(error)
+        console.error(err)
         this.$store.dispatch('resetState')
-      })
+      }
     }
   }
 }

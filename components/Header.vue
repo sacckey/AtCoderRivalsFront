@@ -11,8 +11,8 @@
             <b-nav-item to='/search' v-if="authUser">Search</b-nav-item>
             <b-nav-item-dropdown text='Account' v-if="authUser" right>
               <b-dropdown-item :to="`/atcoder_users/${authUser.atcoderId}`">Profile</b-dropdown-item>
-              <b-dropdown-item :to="`/users/${authUser.userId}/edit`">Settings</b-dropdown-item>
-              <b-dropdown-item @click.stop="logout">Sign Out</b-dropdown-item>
+              <b-dropdown-item to="/edit">Settings</b-dropdown-item>
+              <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -24,19 +24,17 @@
 <script>
 export default {
   methods: {
-    logout({ redirect }) {
-      this.$fire.auth.signOut()
-        .then(() => {
-          // ログアウト成功時
-          window.alert('ログアウトしました')
-          this.$router.go()
-        })
-        .catch((error) => {
-          // ログアウト失敗時
-          window.alert('ログアウトに失敗しました')
-          console.error(error)
-        })
-    },
+    async logout() {
+      try {
+        await this.$fire.auth.signOut()
+
+        window.alert('ログアウトしました')
+        this.$router.go()
+      } catch (err) {
+        window.alert('ログアウトに失敗しました')
+        console.error(err)
+      }
+    }
   }
 }
 </script>

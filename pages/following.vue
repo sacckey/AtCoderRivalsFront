@@ -16,8 +16,6 @@
           :per-page="perPage"
           @change="handlePageChange"
         ></b-pagination>
-
-        <p class="mt-3">Current Page: {{ currentPage }}</p>
       </ul>
     </div>
   </b-row>

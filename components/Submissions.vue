@@ -11,12 +11,12 @@
           <nuxt-link :to="`/atcoder_users/${submission.atcoder_id}`"><img :alt="submission.atcoder_id" class="icon" :src="submission.image_url" width="50" height="50"></nuxt-link>
           <div class="submission">
             <div>
-              <a :class="`btn btn-xs btn-${submission.result.toLowerCase()}`" :href="`https://atcoder.jp/contests/${submission.contest_name}/submissions/${submission.number}`">{{ submission.result }}</a>
+              <a :class="`btn btn-xs btn-${submission.result.toLowerCase()}`" :href="`https://atcoder.jp/contests/${submission.contest_name}/submissions/${submission.number}`" target="_blank">{{ submission.result }}</a>
               <nuxt-link class="name" :to="`/atcoder_users/${submission.atcoder_id}`">{{ submission.atcoder_id }}</nuxt-link>
             </div>
             <div>
-              <a :href="`https://atcoder.jp/contests/${submission.contest_name}`">{{ submission.contest_title }}</a>
-              <a :href="`https://atcoder.jp/contests/${submission.contest_name}/tasks/${submission.problem_name}`">{{ submission.problem_title }}</a>
+              <a :href="`https://atcoder.jp/contests/${submission.contest_name}`" target="_blank">{{ submission.contest_title }}</a>
+              <a :href="`https://atcoder.jp/contests/${submission.contest_name}/tasks/${submission.problem_name}`" target="_blank">{{ submission.problem_title }}</a>
             </div>
             <div class="feed_footer">
               {{ submission.language }}
