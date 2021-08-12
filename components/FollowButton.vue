@@ -49,7 +49,7 @@
 
 <style lang='scss' scoped>
 .follow-btn {
-  padding-left: 150px;
+  padding-left: 20px;
   display: inline-block;
 }
 </style>
