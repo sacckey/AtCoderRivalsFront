@@ -20,7 +20,9 @@ import FollowButton from '~/components/FollowButton.vue'
 
 <style lang='scss' scoped>
 .atcoder_id {
-  position: absolute;
+  display: inline-block;
+  width: 150px;
+  vertical-align: top;
 }
 
 .following {

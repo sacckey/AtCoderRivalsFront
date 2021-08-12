@@ -3,7 +3,7 @@ const env = process.env.NODE_ENV
 module.exports = {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'atcoder-rivals-front',
+    title: 'AtCoder Rivals',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
