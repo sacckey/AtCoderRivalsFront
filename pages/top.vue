@@ -98,10 +98,6 @@ export default {
   }
   .btn {
     width: 250px;
-    color: white;
-    &:hover {
-      color: white;
-    }
   }
   .btn-danger {
     display: block;
@@ -113,6 +109,12 @@ export default {
   .btn-primary, .btn-warning{
     margin: 0px 10px;
     margin-top: 20px;
+  }
+  .btn-warning {
+    color: white;
+    &:hover, &:not(:disabled):not(.disabled):active {
+      color: white;
+    }
   }
 }
 </style>

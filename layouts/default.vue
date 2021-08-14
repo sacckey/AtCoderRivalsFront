@@ -67,13 +67,16 @@ export default {
   font-weight: 500;
   width: 35px;
   color: white;
-  &:hover {
+}
+
+.btn-warning {
+  &:hover, &:not(:disabled):not(.disabled):active {
     color: white;
   }
 }
 
 .btn-outline-primary {
-  &:hover {
+  &:hover, &:not(:disabled):not(.disabled):active {
     color: var(--primary);
     border-color: #0062cc;
     background: white;
