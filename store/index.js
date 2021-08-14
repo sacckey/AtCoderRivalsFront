@@ -51,35 +51,11 @@ export const actions = {
       acceptedCount
     })
   },
-  incrementFollowingCount({ commit }, authUser){
-    let { displayName, userId, followingCount, atcoderId, rating, twitterPhotoURL, atcoderPhotoURL, acceptedCount } = authUser
-    followingCount += 1
-
-    commit('SET_USER', {
-      displayName,
-      userId,
-      followingCount,
-      atcoderId,
-      rating,
-      twitterPhotoURL,
-      atcoderPhotoURL,
-      acceptedCount
-    })
+  incrementFollowingCount({ commit }){
+    commit('INCREMENT_FOLLOWING_COUNT')
   },
-  decrementFollowingCount({ commit }, authUser){
-    let { displayName, userId, followingCount, atcoderId, rating, twitterPhotoURL, atcoderPhotoURL, acceptedCount } = authUser
-    followingCount -= 1
-
-    commit('SET_USER', {
-      displayName,
-      userId,
-      followingCount,
-      atcoderId,
-      rating,
-      twitterPhotoURL,
-      atcoderPhotoURL,
-      acceptedCount
-    })
+  decrementFollowingCount({ commit }){
+    commit('DECREMENT_FOLLOWING_COUNT')
   }
 }
 
@@ -99,5 +75,11 @@ export const mutations = {
   RESET_STATE(state) {
     state.authUser = null
     state.token = null
+  },
+  INCREMENT_FOLLOWING_COUNT(state) {
+    state.authUser.followingCount += 1
+  },
+  DECREMENT_FOLLOWING_COUNT(state) {
+    state.authUser.followingCount -= 1
   }
 }
