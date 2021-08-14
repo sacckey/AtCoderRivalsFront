@@ -28,7 +28,7 @@
       async follow(atcoderUser) {
         try {
           await this.$axios.$post(`v1/atcoder_users/${atcoderUser.atcoder_id}/follow`)
-          this.$store.dispatch('incrementFollowingCount', this.authUser)
+          this.$store.dispatch('incrementFollowingCount')
           this.isFollowing = true
         } catch (err) {
           console.error('error!!!!!!!!!!!')
@@ -37,7 +37,7 @@
       async unfollow(atcoderUser) {
         try {
           await this.$axios.$delete(`v1/atcoder_users/${atcoderUser.atcoder_id}/unfollow`)
-          this.$store.dispatch('decrementFollowingCount', this.authUser)
+          this.$store.dispatch('decrementFollowingCount')
           this.isFollowing = false
         } catch (err) {
           console.error('error!!!!!!!!!!!')
