@@ -64,6 +64,9 @@ module.exports = {
           onAuthStateChangedAction: 'onAuthStateChangedAction',
         },
         ssr: true
+      },
+      analytics: {
+        collectionEnabled: true
       }
     }
   },
