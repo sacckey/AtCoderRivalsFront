@@ -5,7 +5,7 @@
       <h3>User Search</h3>
       <div class="user_search">
         <label for="atcoder_id">AtCoder ID</label>
-        <input v-model="atcoderId" class="form-control" type="text" id="atcoder_id">
+        <input v-model="atcoderId" class="form-control" type="text" id="atcoder_id" @keydown.enter="search">
         <button @click="search" type="button" class="btn btn-primary btn-search" :disabled="validationErrorMessage.length > 0">Search</button>
 
         <span class="validation_error_message">{{ validationErrorMessage }}</span>
@@ -36,7 +36,9 @@ export default {
     }
   },
   methods: {
-    async search() {
+    async search(event) {
+      if (event.isComposing || this.validationErrorMessage.length > 0) return
+
       try {
         const atcoderUser = await this.$axios.$get(`v1/atcoder_users/${this.atcoderId}`)
         this.atcoderUser = atcoderUser

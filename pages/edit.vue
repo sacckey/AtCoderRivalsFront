@@ -3,7 +3,7 @@
     <h1>Update your profile</h1>
     <div class="update-profile-form">
       <label for="atcoder_user_atcoder_id">AtCoder ID</label>
-      <input v-model="atcoderId" class="form-control" type="text" id="atcoder_user_atcoder_id">
+      <input v-model="atcoderId" class="form-control" type="text" id="atcoder_user_atcoder_id" @keydown.enter="save">
       <button @click="save" type="button" class="btn btn-primary" :disabled="validationErrorMessage.length > 0">Save changes</button>
 
       <span class="validation_error_message">{{ validationErrorMessage }}</span>
@@ -28,7 +28,9 @@ export default {
     }
   },
   methods: {
-    async save() {
+    async save(event) {
+      if (event.isComposing || this.validationErrorMessage.length > 0) return
+
       const body = { atcoder_id: this.atcoderId }
       try {
         const updatedAuthUser = await this.$axios.$patch(`v1/users/${this.authUser.userId}`, body)
