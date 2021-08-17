@@ -1,4 +1,5 @@
 # atcoder-rivals-front
+[![ci](https://github.com/sacckey/AtCoderRivalsFront/actions/workflows/ci.yml/badge.svg)](https://github.com/sacckey/AtCoderRivalsFront/actions/workflows/ci.yml)
 
 ## Build Setup
 
