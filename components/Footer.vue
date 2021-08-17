@@ -1,10 +1,13 @@
 <template>
   <footer>
-    <small>
-    </small>
+    <small />
     <nav>
       <ul>
-        <li><nuxt-link to="/contact">Contact</nuxt-link></li>
+        <li>
+          <nuxt-link to="/contact">
+            Contact
+          </nuxt-link>
+        </li>
       </ul>
     </nav>
   </footer>

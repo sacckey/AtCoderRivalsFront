@@ -5,45 +5,44 @@
       <h3>User Search</h3>
       <div class="user_search">
         <label for="atcoder_id">AtCoder ID</label>
-        <input v-model="atcoderId" class="form-control" type="text" id="atcoder_id" @keydown.enter="search">
-        <button @click="search" type="button" class="btn btn-primary btn-search" :disabled="validationErrorMessage.length > 0">Search</button>
+        <input id="atcoder_id" v-model="atcoderId" class="form-control" type="text" @keydown.enter="search">
+        <button type="button" class="btn btn-primary btn-search" :disabled="validationErrorMessage.length > 0" @click="search">
+          Search
+        </button>
 
         <span class="validation_error_message">{{ validationErrorMessage }}</span>
       </div>
 
-      <Following v-if="atcoderUser" :atcoderUser="atcoderUser" />
+      <Following v-if="atcoderUser" :atcoder-user="atcoderUser" />
     </div>
   </b-row>
 </template>
 
 <script>
-import Following from '~/components/Following.vue'
-
 export default {
   middleware: 'auth',
-  data() {
+  data () {
     return {
       atcoderId: 'chokudai',
       atcoderUser: null
     }
   },
   computed: {
-    validationErrorMessage() {
-      if (this.atcoderId.length < 3 || this.atcoderId.length > 16 || this.atcoderId.match(/[^A-Za-z0-9]+/)){
+    validationErrorMessage () {
+      if (this.atcoderId.length < 3 || this.atcoderId.length > 16 || this.atcoderId.match(/[^A-Za-z0-9]+/)) {
         return 'フォーマットが正しくありません'
       }
       return ''
     }
   },
   methods: {
-    async search(event) {
-      if (event.isComposing || this.validationErrorMessage.length > 0) return
+    async search (event) {
+      if (event.isComposing || this.validationErrorMessage.length > 0) { return }
 
       try {
         const atcoderUser = await this.$axios.$get(`v1/atcoder_users/${this.atcoderId}`)
         this.atcoderUser = atcoderUser
       } catch (err) {
-        console.error('error!!!!!!!!!!!')
         const errorMessage = err.response.data.message
         this.callShowAlert(errorMessage)
       }

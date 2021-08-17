@@ -82,6 +82,7 @@ dist
 
 # Service worker
 sw.*
+static/firebase-auth-sw.js
 
 # macOS
 .DS_Store
@@ -92,3 +93,6 @@ sw.*
 # firebase
 .firebase
 public/*
+functions/node_modules/
+functions/nuxt.config.js
+functions/nuxt/

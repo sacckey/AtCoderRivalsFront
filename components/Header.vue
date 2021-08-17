@@ -2,17 +2,31 @@
   <header>
     <b-navbar toggleable="lg" type="dark" variant="info">
       <b-container>
-        <b-navbar-brand to='/'>AtCoder Rivals</b-navbar-brand>
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-navbar-brand to="/">
+          AtCoder Rivals
+        </b-navbar-brand>
+        <b-navbar-toggle target="nav-collapse" />
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav class="ml-auto">
-            <b-nav-item to='/'>Home</b-nav-item>
-            <b-nav-item to='/about'>About</b-nav-item>
-            <b-nav-item to='/search' v-if="authUser">Search</b-nav-item>
-            <b-nav-item-dropdown text='Account' v-if="authUser" right>
-              <b-dropdown-item :to="`/atcoder_users/${authUser.atcoderId}`">Profile</b-dropdown-item>
-              <b-dropdown-item to="/edit">Settings</b-dropdown-item>
-              <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
+            <b-nav-item to="/">
+              Home
+            </b-nav-item>
+            <b-nav-item to="/about">
+              About
+            </b-nav-item>
+            <b-nav-item v-if="authUser" to="/search">
+              Search
+            </b-nav-item>
+            <b-nav-item-dropdown v-if="authUser" text="Account" right>
+              <b-dropdown-item :to="`/atcoder_users/${authUser.atcoderId}`">
+                Profile
+              </b-dropdown-item>
+              <b-dropdown-item to="/edit">
+                Settings
+              </b-dropdown-item>
+              <b-dropdown-item @click="logout">
+                Sign Out
+              </b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -24,7 +38,7 @@
 <script>
 export default {
   methods: {
-    async logout() {
+    async logout () {
       try {
         await this.$fire.auth.signOut()
 
@@ -32,7 +46,6 @@ export default {
         this.$router.go()
       } catch (err) {
         window.alert('ログアウトに失敗しました')
-        console.error(err)
       }
     }
   }

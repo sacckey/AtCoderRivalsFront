@@ -1,5 +1,7 @@
 const env = process.env.NODE_ENV
 
+/* eslint-disable nuxt/no-cjs-in-config */
+// export defaultだとデプロイ時にエラーが発生するため、module.exportsを使う
 module.exports = {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -43,25 +45,25 @@ module.exports = {
     '@nuxtjs/axios',
 
     '@nuxtjs/pwa',
-    '@nuxtjs/firebase',
+    '@nuxtjs/firebase'
   ],
 
   firebase: {
     config: {
-      apiKey: "AIzaSyDYzrKzNdQlPYQgg0ESdW-dmV94xiycndY",
-      authDomain: "atcoder-rivals.firebaseapp.com",
-      projectId: "atcoder-rivals",
-      storageBucket: "atcoder-rivals.appspot.com",
-      messagingSenderId: "385533054515",
-      appId: "1:385533054515:web:58443f89461172e55e9d46",
-      measurementId: "G-0R3T6EQTGR",
+      apiKey: 'AIzaSyDYzrKzNdQlPYQgg0ESdW-dmV94xiycndY',
+      authDomain: 'atcoder-rivals.firebaseapp.com',
+      projectId: 'atcoder-rivals',
+      storageBucket: 'atcoder-rivals.appspot.com',
+      messagingSenderId: '385533054515',
+      appId: '1:385533054515:web:58443f89461172e55e9d46',
+      measurementId: 'G-0R3T6EQTGR',
       databaseURL: ''
     },
     services: {
       auth: {
         persistence: 'local',
         initialize: {
-          onAuthStateChangedAction: 'onAuthStateChangedAction',
+          onAuthStateChangedAction: 'onAuthStateChangedAction'
         },
         ssr: true
       },
@@ -98,6 +100,6 @@ module.exports = {
   },
 
   server: {
-　　port: 3001
+    port: 3001
   }
 }

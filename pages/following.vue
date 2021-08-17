@@ -8,44 +8,42 @@
           v-for="atcoderUser in following"
           :key="atcoderUser.atcoder_id"
         >
-          <Following :atcoderUser="atcoderUser" />
+          <Following :atcoder-user="atcoderUser" />
         </li>
         <b-pagination
           v-model="currentPage"
           :total-rows="authUser.followingCount"
           :per-page="perPage"
           @change="handlePageChange"
-        ></b-pagination>
+        />
       </ul>
     </div>
   </b-row>
 </template>
 
 <script>
-  import Following from '~/components/Following.vue'
-
-  export default {
-    middleware: 'auth',
-    data() {
-      return {
-        perPage: 30,
-        currentPage: 1,
-        following: []
-      }
+export default {
+  middleware: 'auth',
+  async fetch () {
+    await this.getFollowing(this.currentPage)
+  },
+  data () {
+    return {
+      perPage: 30,
+      currentPage: 1,
+      following: []
+    }
+  },
+  methods: {
+    handlePageChange (page) {
+      this.getFollowing(page)
     },
-    async fetch() {
-      await this.getFollowing(this.currentPage)
-    },
-    methods: {
-      handlePageChange(page) {
-        this.getFollowing(page)
-      },
-      async getFollowing(page) {
-        const data = await this.$axios.$get(`v1/users/${this.authUser.userId}/following?page=${page}`).catch((err) => console.error(err))
-        this.following = data.following
-      }
+    async getFollowing (page) {
+      const data = await this.$axios.$get(`v1/users/${this.authUser.userId}/following?page=${page}`).catch(err => console.error(err))
+      this.following = data.following
     }
   }
+}
 </script>
 
 <style lang='scss' scoped>
