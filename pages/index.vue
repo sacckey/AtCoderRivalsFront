@@ -2,7 +2,7 @@
   <b-row>
     <Sidebar />
     <div class="col-lg-8">
-      <Feeds baseURL="v1/timeline" />
+      <Feeds base-url="v1/timeline" />
     </div>
   </b-row>
 </template>

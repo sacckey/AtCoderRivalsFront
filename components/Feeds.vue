@@ -1,9 +1,9 @@
 <template>
   <client-only>
-    <b-tabs content-class="mt-3" v-model="tabIndex">
+    <b-tabs v-model="tabIndex" content-class="mt-3">
       <Submissions :submissions="feeds.submissions" />
       <Contests :contests="feeds.contests" />
-      <infinite-loading :identifier="tabIndex" @infinite="infiniteHandler"></infinite-loading>
+      <infinite-loading :identifier="tabIndex" @infinite="infiniteHandler" />
     </b-tabs>
   </client-only>
 </template>
@@ -15,10 +15,17 @@ import Contests from '~/components/Contests.vue'
 const feedsTypes = ['submissions', 'contests']
 
 export default {
-  props: {
-    baseURL: String
+  components: {
+    Submissions,
+    Contests
   },
-  data() {
+  props: {
+    baseUrl: {
+      type: String,
+      required: true
+    }
+  },
+  data () {
     return {
       feeds: {
         submissions: [],
@@ -26,25 +33,21 @@ export default {
       },
       pages: {
         submissions: 1,
-        contests: 1,
+        contests: 1
       },
-      tabIndex: 0,
+      tabIndex: 0
     }
   },
-  components: {
-    Submissions,
-    Contests
-  },
   computed: {
-    feedsType() {
+    feedsType () {
       return feedsTypes[this.tabIndex]
-    },
+    }
   },
   methods: {
-    async infiniteHandler($state) {
+    async infiniteHandler ($state) {
       const feedsType = this.feedsType
       const page = this.pages[feedsType]
-      const data = await this.$axios.$get(`${this.baseURL}/${feedsType}?page=${page}`).catch((err) => console.error(err))
+      const data = await this.$axios.$get(`${this.baseUrl}/${feedsType}?page=${page}`).catch(err => console.error(err))
       if (data[feedsType].length) {
         this.pages[feedsType] += 1
         this.feeds[feedsType].push(...data[feedsType])
@@ -52,8 +55,8 @@ export default {
       } else {
         $state.complete()
       }
-    },
-  },
+    }
+  }
 }
 </script>
 

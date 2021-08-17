@@ -1,7 +1,7 @@
 <template>
   <b-row>
     <Sidebar />
-    <div class="col-lg-8" v-if="atcoderUser">
+    <div v-if="atcoderUser" class="col-lg-8">
       <div class="profile">
         <a :href="`https://atcoder.jp/users/${atcoderUser.atcoder_id}`" target="_blank"><img :alt="atcoderUser.atcoder_id" class="icon" :src="atcoderUser.image_url" width="100" height="100"></a>
         <div class="info">
@@ -9,13 +9,15 @@
             <a :class="ratingColor(atcoderUser.rating)" :href="`https://atcoder.jp/users/${atcoderUser.atcoder_id}`" target="_blank">{{ atcoderUser.atcoder_id }}</a>
           </h1>
           <table>
-            <tbody><tr><th>Rating</th><td><span :class="ratingColor(atcoderUser.rating)">{{ atcoderUser.rating }}</span></td></tr>
-            <tr><th>AC</th><td>{{ atcoderUser.accepted_count }}</td></tr>
-          </tbody></table>
+            <tbody>
+              <tr><th>Rating</th><td><span :class="ratingColor(atcoderUser.rating)">{{ atcoderUser.rating }}</span></td></tr>
+              <tr><th>AC</th><td>{{ atcoderUser.accepted_count }}</td></tr>
+            </tbody>
+          </table>
         </div>
-        <FollowButton :atcoderUser="atcoderUser" />
+        <FollowButton :atcoder-user="atcoderUser" />
       </div>
-      <Feeds :baseURL="`v1/atcoder_users/${atcoderUser.atcoder_id}`"/>
+      <Feeds :base-url="`v1/atcoder_users/${atcoderUser.atcoder_id}`" />
     </div>
   </b-row>
 </template>
@@ -30,20 +32,19 @@ export default {
     Sidebar,
     Feeds
   },
-  data() {
-    return {
-      atcoderUser: null
-    }
-  },
-  async fetch() {
-    const atcoder_id = this.$route.params.atcoder_id
+  async fetch () {
+    const atcoderId = this.$route.params.atcoder_id
     try {
-      const atcoderUser = await this.$axios.$get(`v1/atcoder_users/${atcoder_id}`)
+      const atcoderUser = await this.$axios.$get(`v1/atcoder_users/${atcoderId}`)
       this.atcoderUser = atcoderUser
     } catch (err) {
-      console.error(err)
       const errorMessage = err.response.data.message
       this.callShowAlert(errorMessage)
+    }
+  },
+  data () {
+    return {
+      atcoderUser: null
     }
   }
 }

@@ -5,48 +5,51 @@
         <h1>AtCoder Rivals</h1>
       </div>
       <div class="btns">
-        <nuxt-link to="/about" class="btn btn-danger btn-lg">About</nuxt-link>
+        <nuxt-link to="/about" class="btn btn-danger btn-lg">
+          About
+        </nuxt-link>
         <div class="btn btn-primary btn-lg" @click="login">
           <b-icon-twitter /> Sign up with Twitter
         </div>
-        <div class="btn btn-warning btn-lg" @click="sampleLogin">Try without signing up</div>
+        <div class="btn btn-warning btn-lg" @click="sampleLogin">
+          Try without signing up
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { BIcon, BIconTwitter } from 'bootstrap-vue'
+import { BIconTwitter } from 'bootstrap-vue'
 export default {
   layout: 'top',
-  middleware({ store, redirect }) {
-    if(store.getters['isLoggedIn']) {
-      redirect('/');
+  middleware ({ store, redirect }) {
+    if (store.getters.isLoggedIn) {
+      redirect('/')
     }
   },
   components: {
-    BIcon,
-    BIconTwitter,
+    BIconTwitter
   },
   methods: {
-    async login(){
+    async login () {
       try {
         const provider = new this.$fireModule.auth.TwitterAuthProvider()
         const result = await this.$fire.auth.signInWithPopup(provider)
         const token = await result.user.getIdToken()
         this.$store.dispatch('setToken', token)
-        const authUser = await this.$axios.$post(`v1/sessions`)
+        const authUser = await this.$axios.$post('v1/sessions')
         this.$store.dispatch('setUser', authUser)
 
         window.alert('ログインしました')
         this.$router.push('/')
       } catch (err) {
-         window.alert('ログインに失敗しました')
-         console.error(err)
-         this.$store.dispatch('resetState')
+        window.alert('ログインに失敗しました')
+        console.error(err)
+        this.$store.dispatch('resetState')
       }
     },
-    async sampleLogin() {
+    async sampleLogin () {
       try {
         const authUser = await this.$axios.$post('v1/sessions/sample_login')
         this.$store.dispatch('setUser', authUser)
