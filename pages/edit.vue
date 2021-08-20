@@ -38,11 +38,11 @@ export default {
         const updatedAuthUser = await this.$axios.$patch(`v1/users/${this.authUser.userId}`, body)
         this.$store.dispatch('setUser', updatedAuthUser)
 
-        window.alert('AtCoder IDを変更しました')
+        this.showAlert('AtCoder ID updated', 3, 'success')
         this.$router.push(`/atcoder_users/${this.authUser.atcoderId}`)
       } catch (err) {
         const errorMessage = err.response.data.message
-        this.callShowAlert(errorMessage)
+        this.showErrorAlert(errorMessage)
       }
     }
   }

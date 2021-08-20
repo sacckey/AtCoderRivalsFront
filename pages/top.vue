@@ -1,6 +1,7 @@
 <template>
   <div class="jumbotron jumbotron-fluid jumbotron-extend">
     <div class="container-fluid jumbotron-container">
+      <Alert v-if="alert" />
       <div class="acr">
         <h1>AtCoder Rivals</h1>
       </div>
@@ -41,10 +42,15 @@ export default {
         const authUser = await this.$axios.$post('v1/sessions')
         this.$store.dispatch('setUser', authUser)
 
-        window.alert('ログインしました')
+        if (authUser.auth_user.is_first_login) {
+          this.showAlert('Please update your AtCoder ID', 30, 'success')
+          this.$router.push('/edit')
+          return
+        }
+
         this.$router.push('/')
       } catch (err) {
-        window.alert('ログインに失敗しました')
+        this.showErrorAlert('ログインに失敗しました')
         console.error(err)
         this.$store.dispatch('resetState')
       }
@@ -55,10 +61,15 @@ export default {
         this.$store.dispatch('setUser', authUser)
         this.$store.dispatch('setToken', authUser.auth_user.token)
 
-        window.alert('ログインしました')
+        if (authUser.auth_user.is_first_login) {
+          this.showAlert('Please update your AtCoder ID', 30, 'success')
+          this.$router.push('/edit')
+          return
+        }
+
         this.$router.push('/')
       } catch (err) {
-        window.alert('ログインに失敗しました')
+        this.showErrorAlert('ログインに失敗しました')
         console.error(err)
         this.$store.dispatch('resetState')
       }

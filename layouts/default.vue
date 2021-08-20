@@ -2,54 +2,12 @@
   <div>
     <Header />
     <b-container>
-      <b-alert
-        :show="dismissCountDown"
-        dismissible
-        fade
-        variant="danger"
-        @dismissed="dismissCountDown=0"
-        @dismiss-count-down="countDownChanged"
-      >
-        {{ message }}
-      </b-alert>
+      <Alert v-if="alert" />
       <Nuxt />
       <Footer />
     </b-container>
   </div>
 </template>
-
-<script>
-import Header from '~/components/Header.vue'
-import Footer from '~/components/Footer.vue'
-
-export default {
-  components: {
-    Header,
-    Footer
-  },
-  data () {
-    return {
-      message: '',
-      dismissSecs: 3,
-      dismissCountDown: 0
-    }
-  },
-  created () {
-    this.$nuxt.$on('show-alert', (message) => {
-      this.showAlert(message)
-    })
-  },
-  methods: {
-    countDownChanged (dismissCountDown) {
-      this.dismissCountDown = dismissCountDown
-    },
-    showAlert (message) {
-      this.message = message
-      this.dismissCountDown = this.dismissSecs
-    }
-  }
-}
-</script>
 
 <style lang='scss'>
 @import '~bootstrap/scss/bootstrap';

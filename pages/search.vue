@@ -44,7 +44,7 @@ export default {
         this.atcoderUser = atcoderUser
       } catch (err) {
         const errorMessage = err.response.data.message
-        this.callShowAlert(errorMessage)
+        this.showErrorAlert(errorMessage)
       }
     }
   }
