@@ -7,7 +7,7 @@ Vue.mixin({
     },
     alert () {
       return this.$store.state.alert
-    },
+    }
   },
   methods: {
     ratingColor (rating) {
@@ -30,13 +30,7 @@ Vue.mixin({
       }
     },
     showAlert (message, dismissCount, variant) {
-      alert = {
-        message: message,
-        dismissCount: dismissCount,
-        variant: variant
-      }
-
-      this.$store.dispatch('setAlert', alert)
+      this.$store.dispatch('setAlert', { message, dismissCount, variant })
     },
     showErrorAlert (message) {
       this.showAlert(message, 3, 'danger')
