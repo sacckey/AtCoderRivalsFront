@@ -61,6 +61,10 @@ export const actions = {
   },
   resetAlert ({ commit }) {
     commit('RESET_ALERT')
+  },
+  updateAlertDismissCount ({ state, dispatch }, dismissCount) {
+    alert = { message: state.alert.message, dismissCount, variant: state.alert.variant }
+    dispatch('setAlert', alert)
   }
 }
 
