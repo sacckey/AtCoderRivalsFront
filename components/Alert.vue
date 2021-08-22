@@ -12,11 +12,11 @@
 </template>
 
 <script>
-  export default {
-    methods: {
-      countDownChanged(dismissCountDown) {
-        this.$store.dispatch('updateAlertDismissCount', dismissCountDown)
-      }
+export default {
+  methods: {
+    countDownChanged (dismissCountDown) {
+      this.$store.dispatch('updateAlertDismissCount', dismissCountDown)
     }
   }
+}
 </script>
