@@ -23,15 +23,8 @@
 </template>
 
 <script>
-import Sidebar from '~/components/Sidebar.vue'
-import Feeds from '~/components/Feeds.vue'
-
 export default {
   middleware: 'auth',
-  components: {
-    Sidebar,
-    Feeds
-  },
   async fetch () {
     const atcoderId = this.$route.params.atcoder_id
     try {
@@ -39,7 +32,7 @@ export default {
       this.atcoderUser = atcoderUser
     } catch (err) {
       const errorMessage = err.response.data.message
-      this.callShowAlert(errorMessage)
+      this.showErrorAlert(errorMessage)
     }
   },
   data () {

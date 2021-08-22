@@ -42,10 +42,9 @@ export default {
       try {
         await this.$fire.auth.signOut()
 
-        window.alert('ログアウトしました')
         this.$router.go()
       } catch (err) {
-        window.alert('ログアウトに失敗しました')
+        this.showErrorAlert('ログアウトに失敗しました')
       }
     }
   }

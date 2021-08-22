@@ -4,6 +4,9 @@ Vue.mixin({
   computed: {
     authUser () {
       return this.$store.state.authUser
+    },
+    alert () {
+      return this.$store.state.alert
     }
   },
   methods: {
@@ -26,8 +29,14 @@ Vue.mixin({
         return 'rating_red'
       }
     },
-    callShowAlert (message) {
-      this.$nuxt.$emit('show-alert', message)
+    showAlert (message, dismissCount, variant) {
+      this.$store.dispatch('setAlert', { message, dismissCount, variant })
+    },
+    showErrorAlert (message) {
+      this.showAlert(message, 3, 'danger')
+    },
+    hideAlert () {
+      this.$store.dispatch('resetAlert')
     }
   }
 })

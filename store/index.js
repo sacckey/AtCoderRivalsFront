@@ -1,6 +1,7 @@
 export const state = () => ({
   authUser: null,
-  token: null
+  token: null,
+  alert: null
 })
 
 export const getters = {
@@ -54,6 +55,15 @@ export const actions = {
   },
   decrementFollowingCount ({ commit }) {
     commit('DECREMENT_FOLLOWING_COUNT')
+  },
+  setAlert ({ commit }, alert) {
+    commit('SET_ALERT', alert)
+  },
+  resetAlert ({ commit }) {
+    commit('RESET_ALERT')
+  },
+  updateAlertDismissCount ({ state, dispatch }, dismissCount) {
+    dispatch('setAlert', { message: state.alert.message, dismissCount, variant: state.alert.variant })
   }
 }
 
@@ -79,5 +89,11 @@ export const mutations = {
   },
   DECREMENT_FOLLOWING_COUNT (state) {
     state.authUser.followingCount -= 1
+  },
+  SET_ALERT (state, alert) {
+    state.alert = alert
+  },
+  RESET_ALERT (state) {
+    state.alert = null
   }
 }
