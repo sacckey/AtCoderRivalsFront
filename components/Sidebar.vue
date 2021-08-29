@@ -1,5 +1,5 @@
 <template>
-  <aside v-if="authUser" class="col-lg-4 sidebar">
+  <aside v-if="$store.getters.isLoggedIn" class="col-lg-4 sidebar">
     <div class="user_info">
       <nuxt-link :to="`/atcoder_users/${authUser.atcoderId}`">
         <img :alt="authUser.displayName" class="icon" :src="authUser.twitterPhotoURL" width="80" height="80">

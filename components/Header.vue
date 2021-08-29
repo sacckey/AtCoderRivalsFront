@@ -14,10 +14,13 @@
             <b-nav-item to="/about">
               About
             </b-nav-item>
-            <b-nav-item v-if="authUser" to="/search">
+            <b-nav-item v-if="$store.getters.isLoggedIn" to="/search">
               Search
             </b-nav-item>
-            <b-nav-item-dropdown v-if="authUser" text="Account" right>
+            <b-nav-item v-if="$store.getters.isAdmin" to="/admin">
+              Admin
+            </b-nav-item>
+            <b-nav-item-dropdown v-if="$store.getters.isLoggedIn" text="Account" right>
               <b-dropdown-item :to="`/atcoder_users/${authUser.atcoderId}`">
                 Profile
               </b-dropdown-item>
