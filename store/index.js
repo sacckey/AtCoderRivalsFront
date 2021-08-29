@@ -5,7 +5,8 @@ export const state = () => ({
 })
 
 export const getters = {
-  isLoggedIn: state => !!state.authUser
+  isLoggedIn: state => !!state.authUser,
+  isAdmin: state => !!state.authUser && state.authUser.isAdmin
 }
 
 export const actions = {
@@ -37,7 +38,7 @@ export const actions = {
     commit('RESET_STATE')
   },
   setUser ({ commit }, authUser) {
-    const { user_name: displayName, user_id: userId, following_count: followingCount, atcoder_id: atcoderId, rating, user_image_url: twitterPhotoURL, atcoder_user_image_url: atcoderPhotoURL, accepted_count: acceptedCount } = authUser.auth_user
+    const { user_name: displayName, user_id: userId, following_count: followingCount, atcoder_id: atcoderId, rating, user_image_url: twitterPhotoURL, atcoder_user_image_url: atcoderPhotoURL, accepted_count: acceptedCount, is_admin: isAdmin } = authUser.auth_user
 
     commit('SET_USER', {
       displayName,
@@ -47,7 +48,8 @@ export const actions = {
       rating,
       twitterPhotoURL,
       atcoderPhotoURL,
-      acceptedCount
+      acceptedCount,
+      isAdmin
     })
   },
   incrementFollowingCount ({ commit }) {
