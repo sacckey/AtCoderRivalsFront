@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     validationErrorMessage () {
-      if (this.atcoderId.length < 3 || this.atcoderId.length > 16 || this.atcoderId.match(/[^A-Za-z0-9]+/)) {
+      if (this.atcoderId.length < 3 || this.atcoderId.length > 16 || this.atcoderId.match(/[^A-Za-z0-9_]+/)) {
         return 'フォーマットが正しくありません'
       }
       return ''
