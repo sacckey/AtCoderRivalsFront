@@ -1,13 +1,28 @@
 <template>
   <div>
-    <Header />
-    <b-container>
-      <Alert v-if="alert" />
+    <div v-if="isTop">
       <Nuxt />
-      <Footer />
-    </b-container>
+    </div>
+    <div v-else>
+      <Header />
+      <b-container>
+        <Alert v-if="alert" />
+        <Nuxt />
+        <Footer />
+      </b-container>
+    </div>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    isTop () {
+      return !this.$store.getters.isLoggedIn && this.$route.path === '/'
+    }
+  }
+}
+</script>
 
 <style lang='scss'>
 @import '~bootstrap/scss/bootstrap';
