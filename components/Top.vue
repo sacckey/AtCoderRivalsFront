@@ -23,12 +23,6 @@
 <script>
 import { BIconTwitter } from 'bootstrap-vue'
 export default {
-  layout: 'top',
-  middleware ({ store, redirect }) {
-    if (store.getters.isLoggedIn) {
-      redirect('/')
-    }
-  },
   components: {
     BIconTwitter
   },
