@@ -19,12 +19,13 @@ export default {
   props: {
     initialAtcoderId: {
       type: String,
-      required: false
+      required: false,
+      default: 'chokudai'
     }
   },
   data () {
     return {
-      atcoderId: this.initialAtcoderId || 'chokudai',
+      atcoderId: this.initialAtcoderId,
       atcoderUser: null
     }
   },
