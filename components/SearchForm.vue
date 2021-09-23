@@ -67,10 +67,6 @@ export default {
   margin-bottom: 50px;
 }
 
-input#search{
-  width: 100%;
-}
-
 label {
   display: inline-block;
   max-width: 100%;
