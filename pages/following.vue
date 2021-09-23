@@ -8,7 +8,7 @@
           v-for="atcoderUser in following"
           :key="atcoderUser.atcoder_id"
         >
-          <Following :atcoder-user="atcoderUser" />
+          <FollowForm :atcoder-user="atcoderUser" />
         </li>
         <b-pagination
           v-model="currentPage"

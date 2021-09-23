@@ -7,19 +7,24 @@
         Search
       </button>
 
-      <span class="validation_error_message">{{ validationErrorMessage }}</span>
+      <span v-if="atcoderId.length >=3" class="validation_error_message">{{ validationErrorMessage }}</span>
     </div>
 
-    <!-- <Following v-if="atcoderUser" :atcoder-user="atcoderUser" /> -->
     <Component :is="componentName" v-if="atcoderUser" :atcoder-user="atcoderUser" />
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    initialAtcoderId: {
+      type: String,
+      required: false
+    }
+  },
   data () {
     return {
-      atcoderId: 'chokudai',
+      atcoderId: this.initialAtcoderId || 'chokudai',
       atcoderUser: null
     }
   },
@@ -33,9 +38,8 @@ export default {
     componentName () {
       const routeName = this.$route.name
 
-      if (routeName === 'search') {
-        return 'Following'
-      }
+      if (routeName === 'search') { return 'FollowForm' }
+      if (routeName === 'edit') { return 'UpdateProfileForm' }
 
       return ''
     }
