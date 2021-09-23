@@ -10,7 +10,7 @@
           About
         </nuxt-link>
         <div class="btn btn-primary btn-lg" @click="login">
-          <img src="twitter.svg" class='twitter-icon'>
+          <img src="twitter.svg" class="twitter-icon">
           Sign up with Twitter
         </div>
         <div class="btn btn-warning btn-lg" @click="sampleLogin">
