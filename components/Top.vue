@@ -10,7 +10,8 @@
           About
         </nuxt-link>
         <div class="btn btn-primary btn-lg" @click="login">
-          <b-icon-twitter /> Sign up with Twitter
+          <img src="twitter.svg" class="twitter-icon">
+          Sign up with Twitter
         </div>
         <div class="btn btn-warning btn-lg" @click="sampleLogin">
           Try without signing up
@@ -21,11 +22,7 @@
 </template>
 
 <script>
-import { BIconTwitter } from 'bootstrap-vue'
 export default {
-  components: {
-    BIconTwitter
-  },
   methods: {
     async login () {
       try {
@@ -73,8 +70,10 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.bi-twitter  {
-  margin-right: 5px;
+.twitter-icon  {
+  position: relative;
+  bottom: 2px;
+  right: 4px;
 }
 
 .jumbotron {
