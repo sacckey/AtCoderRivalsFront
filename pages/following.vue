@@ -39,8 +39,12 @@ export default {
       this.getFollowing(page)
     },
     async getFollowing (page) {
-      const data = await this.$axios.$get(`v1/users/${this.authUser.userId}/following?page=${page}`).catch(err => console.error(err))
-      this.following = data.following
+      try {
+        const data = await this.$axios.$get(`v1/users/${this.authUser.userId}/following?page=${page}`)
+        this.following = data.following
+      } catch (err) {
+        this.showErrorAlert(err)
+      }
     }
   }
 }

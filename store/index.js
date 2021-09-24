@@ -21,14 +21,13 @@ export const actions = {
     if (res?.locals?.user) {
       const { idToken: token } = res.locals.user
       commit('SET_TOKEN', token)
-      const authUser = await this.$axios.$get('v1/sessions/auth_user').catch(err => console.error(err))
 
-      if (!authUser) {
-        console.error('認証失敗')
-        return
+      try {
+        const authUser = await this.$axios.$get('v1/sessions/auth_user')
+        dispatch('setUser', authUser)
+      } catch (err) {
+        dispatch('setAlert', { message: 'Authentication Failed', dismissCount: 3, variant: 'danger' })
       }
-
-      dispatch('setUser', authUser)
     }
   },
   setToken ({ commit }, token) {

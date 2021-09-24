@@ -34,7 +34,7 @@ export default {
         this.$store.dispatch('incrementFollowingCount')
         this.isFollowing = true
       } catch (err) {
-        console.error('error!!!!!!!!!!!')
+        this.showErrorAlert(err)
       }
     },
     async unfollow (atcoderUser) {
@@ -43,7 +43,7 @@ export default {
         this.$store.dispatch('decrementFollowingCount')
         this.isFollowing = false
       } catch (err) {
-        console.error('error!!!!!!!!!!!')
+        this.showErrorAlert(err)
       }
     }
   }

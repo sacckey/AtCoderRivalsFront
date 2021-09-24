@@ -75,7 +75,7 @@ export default {
           this.totalRows = data.count
         }
       } catch (err) {
-        console.error(err)
+        this.showErrorAlert(err)
       }
     }
   }

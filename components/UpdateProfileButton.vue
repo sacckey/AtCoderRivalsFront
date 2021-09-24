@@ -24,8 +24,7 @@ export default {
         this.showAlert('AtCoder ID updated', 3, 'success')
         this.$router.push(`/atcoder_users/${this.authUser.atcoderId}`)
       } catch (err) {
-        const errorMessage = err.response.data.message
-        this.showErrorAlert(errorMessage)
+        this.showErrorAlert(err)
       }
     }
   }
