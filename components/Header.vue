@@ -44,10 +44,9 @@ export default {
     async logout () {
       try {
         await this.$fire.auth.signOut()
-
         this.$router.go()
       } catch (err) {
-        this.showErrorAlert('ログアウトに失敗しました')
+        this.showErrorAlert(err)
       }
     }
   }

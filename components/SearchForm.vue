@@ -53,8 +53,7 @@ export default {
         const atcoderUser = await this.$axios.$get(`v1/atcoder_users/${this.atcoderId}`)
         this.atcoderUser = atcoderUser
       } catch (err) {
-        const errorMessage = err.response.data.message
-        this.showErrorAlert(errorMessage)
+        this.showErrorAlert(err)
       }
     }
   }

@@ -41,8 +41,7 @@ export default {
 
         this.$router.push('/')
       } catch (err) {
-        this.showErrorAlert('ログインに失敗しました')
-        console.error(err)
+        this.showErrorAlert(err)
         this.$store.dispatch('resetState')
       }
     },
@@ -60,8 +59,7 @@ export default {
 
         this.$router.push('/')
       } catch (err) {
-        this.showErrorAlert('ログインに失敗しました')
-        console.error(err)
+        this.showErrorAlert(err)
         this.$store.dispatch('resetState')
       }
     }

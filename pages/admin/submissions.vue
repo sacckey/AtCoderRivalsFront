@@ -21,13 +21,17 @@ export default {
   },
   methods: {
     async infiniteHandler ($state) {
-      const data = await this.$axios.$get(`v1/admin/submissions?page=${this.page}`).catch(err => console.error(err))
-      if (data.submissions.length) {
-        this.page += 1
-        this.submissions.push(...data.submissions)
-        $state.loaded()
-      } else {
-        $state.complete()
+      try {
+        const data = await this.$axios.$get(`v1/admin/submissions?page=${this.page}`)
+        if (data.submissions.length) {
+          this.page += 1
+          this.submissions.push(...data.submissions)
+          $state.loaded()
+        } else {
+          $state.complete()
+        }
+      } catch (err) {
+        this.showErrorAlert(err)
       }
     }
   }

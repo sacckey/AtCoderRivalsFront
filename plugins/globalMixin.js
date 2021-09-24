@@ -32,7 +32,8 @@ Vue.mixin({
     showAlert (message, dismissCount, variant) {
       this.$store.dispatch('setAlert', { message, dismissCount, variant })
     },
-    showErrorAlert (message) {
+    showErrorAlert (err) {
+      const message = err?.response?.data?.message || 'error!'
       this.showAlert(message, 3, 'danger')
     },
     hideAlert () {

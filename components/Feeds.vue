@@ -47,13 +47,17 @@ export default {
     async infiniteHandler ($state) {
       const feedsType = this.feedsType
       const page = this.pages[feedsType]
-      const data = await this.$axios.$get(`${this.baseUrl}/${feedsType}?page=${page}`).catch(err => console.error(err))
-      if (data[feedsType].length) {
-        this.pages[feedsType] += 1
-        this.feeds[feedsType].push(...data[feedsType])
-        $state.loaded()
-      } else {
-        $state.complete()
+      try {
+        const data = await this.$axios.$get(`${this.baseUrl}/${feedsType}?page=${page}`)
+        if (data[feedsType].length) {
+          this.pages[feedsType] += 1
+          this.feeds[feedsType].push(...data[feedsType])
+          $state.loaded()
+        } else {
+          $state.complete()
+        }
+      } catch (err) {
+        this.showErrorAlert(err)
       }
     }
   }
