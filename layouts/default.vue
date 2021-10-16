@@ -1,16 +1,12 @@
 <template>
-  <div>
-    <div v-if="isTop">
+  <Nuxt v-if="isTop" />
+  <div v-else>
+    <Header />
+    <b-container>
+      <Alert v-if="alert" />
       <Nuxt />
-    </div>
-    <div v-else>
-      <Header />
-      <b-container>
-        <Alert v-if="alert" />
-        <Nuxt />
-        <Footer />
-      </b-container>
-    </div>
+      <Footer />
+    </b-container>
   </div>
 </template>
 
@@ -39,10 +35,10 @@ export default {
   border-radius: 3px;
   font-weight: 500;
   width: 35px;
-  color: white;
 }
 
 .btn-warning {
+  color :white;
   &:hover, &:not(:disabled):not(.disabled):active {
     color: white;
   }

@@ -34,9 +34,13 @@
 <style lang='scss' scoped>
   .screenshot {
     text-align: center;
-    margin-bottom: 20px;
   }
   h1{
     text-align: center;
+  }
+  img {
+    margin-bottom: 20px;
+    max-width: 100%;
+    height: auto;
   }
 </style>

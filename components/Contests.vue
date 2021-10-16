@@ -15,8 +15,8 @@
                 <th>#</th>
                 <th>place</th>
                 <th>name</th>
-                <th>performance</th>
-                <th>rating change</th>
+                <th>perf</th>
+                <th>rating</th>
               </tr>
             </thead>
             <tbody>
