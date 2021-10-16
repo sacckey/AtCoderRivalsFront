@@ -1,28 +1,29 @@
 <template>
-  <div class="jumbotron jumbotron-fluid jumbotron-extend">
-    <div class="container-fluid jumbotron-container">
-      <Alert v-if="alert" />
-      <div class="acr">
-        <h1>AtCoder Rivals</h1>
-      </div>
-      <div class="btns">
-        <nuxt-link to="/about" class="btn btn-danger btn-lg">
-          About
-        </nuxt-link>
-        <div class="btn btn-primary btn-lg" @click="login">
-          <img src="twitter.svg" class="twitter-icon">
-          Sign up with Twitter
+  <client-only>
+    <Vue100vh>
+      <b-jumbotron header="AtCoder Rivals" fluid>
+        <div class="btns">
+          <nuxt-link to="/about" class="btn btn-danger btn-lg">
+            About
+          </nuxt-link>
+          <div class="btn btn-primary btn-lg" @click="login">
+            <img src="twitter.svg" class="twitter-icon">
+            Sign up with Twitter
+          </div>
+          <div class="btn btn-warning btn-lg" @click="sampleLogin">
+            Try without signing up
+          </div>
         </div>
-        <div class="btn btn-warning btn-lg" @click="sampleLogin">
-          Try without signing up
-        </div>
-      </div>
-    </div>
-  </div>
+      </b-jumbotron>
+    </Vue100vh>
+  </client-only>
 </template>
 
 <script>
+import Vue100vh from 'vue-div-100vh'
+
 export default {
+  components: { Vue100vh },
   methods: {
     async login () {
       try {
@@ -68,57 +69,53 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.twitter-icon  {
-  position: relative;
-  bottom: 2px;
-  right: 4px;
-}
-
 .jumbotron {
   margin: 0;
-}
-
-.jumbotron-extend {
-  position: relative;
-  height: 100vh;
-  min-height: 300px;
+  height: 100%;
   background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url('../assets/images/bg-masthead.jpg');
   background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
   background-size: cover;
 
-  .jumbotron-container {
+  .container {
     position: relative;
-    top: 40%;
-    transform: translateY(-50%);
-    color: white;
+    height: 100%;
     text-align: center;
-  }
-  .acr{
-    margin-top: 140px;
-    h1{
-      font-size: 95px;
-    }
-  }
-  .btn {
-    width: 250px;
-  }
-  .btn-danger {
-    display: block;
-    margin: auto;
-    border-radius:23px;
-    margin-top: 120px;
-    margin-bottom: 30px;
-  }
-  .btn-primary, .btn-warning{
-    margin: 0px 10px;
-    margin-top: 20px;
-  }
-  .btn-warning {
     color: white;
-    &:hover, &:not(:disabled):not(.disabled):active {
-      color: white;
+    h1 {
+      position: absolute;
+      top: 60%;
+      transform: translateY(-150%);
+      left: 0;
+      right: 0;
+      font-size: 90px;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    .btns {
+      position: absolute;
+      bottom: 30%;
+      transform: translateY(80%);
+      left: 0;
+      right: 0;
+
+      .twitter-icon {
+        position: relative;
+        bottom: 2px;
+        right: 4px;
+      }
+      .btn {
+        width: 250px;
+      }
+      .btn-danger {
+        display: block;
+        margin: auto;
+        border-radius: 23px;
+        margin-bottom: 30px;
+      }
+      .btn-primary, .btn-warning {
+        margin: 0px 10px;
+        margin-top: 20px;
+      }
     }
   }
 }
