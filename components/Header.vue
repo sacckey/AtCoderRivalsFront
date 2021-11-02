@@ -11,6 +11,9 @@
             <b-nav-item to="/">
               Home
             </b-nav-item>
+            <b-nav-item v-if="$store.getters.isAdmin" to="/hasura">
+              Hasura
+            </b-nav-item>
             <b-nav-item to="/about">
               About
             </b-nav-item>

@@ -73,7 +73,8 @@ module.exports = {
       },
       analytics: {
         collectionEnabled: true
-      }
+      },
+      functions: true
     }
   },
 
