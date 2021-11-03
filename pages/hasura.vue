@@ -42,7 +42,7 @@ export default {
         }
 
         const func = functions.httpsCallable('setCustomClaims')
-        await func({ name: 'hoge' })
+        await func()
 
         const token = await this.$fire.auth.currentUser.getIdToken(true)
         this.$store.dispatch('setToken', token)
