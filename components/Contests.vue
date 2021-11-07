@@ -30,7 +30,7 @@
                     <img :alt="history.atcoder_id" :src="history.image_url" width="20" height="20">
                   </nuxt-link>
                 </td>
-                <td><a :href="`https://atcoder.jp/contests/abc173/standings?watching=${history.atcoder_id}`" target="_blank">{{ history.place }}</a></td>
+                <td><a :href="`https://atcoder.jp/contests/${contest.contest_name}/standings?watching=${history.atcoder_id}`" target="_blank">{{ history.place }}</a></td>
                 <td>
                   <nuxt-link :class="ratingColor(history.old_rating)" :to="`/atcoder_users/${history.atcoder_id}`">
                     {{ history.atcoder_id }}
